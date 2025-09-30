@@ -71,6 +71,14 @@ header p {
     opacity: 0.9;
 }
 
+.announcement-container {
+    background: var(--accent-color);
+    color: var(--light-text-color);
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
 #main-content {
     flex-grow: 1;
     padding: 20px;

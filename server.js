@@ -10,6 +10,11 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.get('/admin', (req, res) => {
+    console.log('Request received for /admin'); // Log when admin is accessed
+    res.sendFile(path.join(__dirname, 'admin.html'));
+});
+
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);
 });

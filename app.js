@@ -855,6 +855,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     }
 
+    function loadAnnouncements() {
+        const announcementContainer = document.getElementById('announcement-container');
+        // Dummy announcement
+        const announcement = {
+            title: 'Terminal 1 Renovation',
+            message: 'Terminal 1 will be closed for renovation from 1st October to 31st December.'
+        };
+
+        if (announcement) {
+            announcementContainer.innerHTML = `<strong>${announcement.title}:</strong> ${announcement.message}`;
+            announcementContainer.style.display = 'block';
+        } else {
+            announcementContainer.style.display = 'none';
+        }
+    }
+
     // Initial load
     loadFeature('home');
+    loadAnnouncements();
 });
