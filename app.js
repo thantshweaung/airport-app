@@ -28,14 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="material-symbols-outlined">account_balance_wallet</span>
                         <span>Wallet</span>
                     </div>
-                    <div class="quick-action-item" data-feature="points">
-                        <span class="material-symbols-outlined">military_tech</span>
-                        <span>Rewards</span>
-                    </div>
-                    <div class="quick-action-item" data-feature="lounge">
-                        <span class="material-symbols-outlined">airline_seat_recline_normal</span>
-                        <span>Lounge</span>
-                    </div>
                     <div class="quick-action-item" data-feature="parking">
                         <span class="material-symbols-outlined">directions_car</span>
                         <span>Parking</span>
@@ -62,10 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="home-item" data-feature="ev_charging">
                         <span class="material-symbols-outlined">ev_station</span>
                         <span>EV Charging</span>
-                    </div>
-                    <div class="home-item" data-feature="carbon_offset">
-                        <span class="material-symbols-outlined">public</span>
-                        <span>Carbon Offset</span>
                     </div>
                     <div class="home-item" data-feature="carbon_offset">
                         <span class="material-symbols-outlined">public</span>
@@ -302,26 +290,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `,
-        lounge: `
-            <div class="feature-card">
-                <h2><span class="material-symbols-outlined">airline_seat_recline_normal</span> CIP Lounge Booking</h2>
-                <form id="lounge-booking-form">
-                    <div class="form-group">
-                        <label for="lounge-name">Full Name</label>
-                        <input type="text" id="lounge-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lounge-flight">Flight Number</label>
-                        <input type="text" id="lounge-flight" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lounge-time">Entry Time</label>
-                        <input type="datetime-local" id="lounge-time" required>
-                    </div>
-                    <button type="submit" class="btn">Book Now</button>
-                </form>
-            </div>
-        `,
         parking: `
             <div class="feature-card">
                 <h2><span class="material-symbols-outlined">directions_car</span> Car Park Availability</h2>
@@ -377,6 +345,35 @@ document.addEventListener('DOMContentLoaded', () => {
                         <input type="text" id="arrival" placeholder="e.g., BKK">
                     </div>
                     <button type="submit" class="btn">Calculate & Offset</button>
+                </form>
+            </div>
+        `,
+        top_up: `
+            <div class="feature-card">
+                <h2><span class="material-symbols-outlined">add_card</span> Top Up Wallet</h2>
+                <form id="top-up-form">
+                    <div class="form-group">
+                        <label for="top-up-amount">Amount (MMK)</label>
+                        <input type="number" id="top-up-amount" placeholder="Enter amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Choose Payment Method</label>
+                        <div class="payment-methods">
+                            <div class="payment-method" data-method="kbzpay">
+                                <img src="https://play-lh.googleusercontent.com/cnKJYzzHFAE5ZRepCsGVhv7ZnoDfK8Wu5z6lMefeT-45fTNfUblK_gF3JyW5VZsjFc4=w240-h480-rw" alt="KBZPay">
+                                <span>KBZPay</span>
+                            </div>
+                            <div class="payment-method" data-method="wavepay">
+                                <img src="https://play-lh.googleusercontent.com/RBioijJkvKAdlGQUaKuKZ4N_ya2k6UCgW47r3cksuDJWl6qn8g3VOd2h7aNNgYmerBo=w240-h480-rw" alt="WavePay">
+                                <span>WavePay</span>
+                            </div>
+                            <div class="payment-method" data-method="cbpay">
+                                <img src="https://play-lh.googleusercontent.com/ErPz7wvjl-tmKkfsTDtxz4XepVocji0Mo0k9Somq7ydxA7y49JHU9EnGMUGDUY9Nveq-=w240-h480-rw" alt="CBPay">
+                                <span>CBPay</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Proceed to Payment</button>
                 </form>
             </div>
         `,
@@ -440,34 +437,60 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `,
-        points: `
+        profile: `
             <div class="feature-card">
-                <h2><span class="material-symbols-outlined">military_tech</span> Points & Rewards</h2>
-                <div class="points-balance">
-                    <span class="balance-label">Your Points</span>
-                    <div class="balance-amount">1,250 pts</div>
+                <h2><span class="material-symbols-outlined">person</span> User Profile</h2>
+                <div class="profile-info">
+                    <img src="https://dummyimage.com/150x150/000/fff&text=TSA" alt="User Avatar" class="avatar">
+                    <h3>Thant Shwe Aung</h3>
+                    <p>thantshweaung@example.com</p>
+                    <span class="membership-tier">Gold Member</span>
                 </div>
-                <div class="rewards-list">
-                    <h3 class="list-header">Available Rewards</h3>
-                    <div class="reward-item">
-                        <div class="item-details">
-                            <span class="material-symbols-outlined">coffee</span>
-                            <div>
-                                <div>Free Coffee</div>
-                                <small>500 pts</small>
-                            </div>
-                        </div>
-                        <button class="btn">Redeem</button>
+                <div class="profile-actions">
+                    <div class="profile-action-item">
+                        <span class="material-symbols-outlined">history</span>
+                        <span>View Activity</span>
                     </div>
-                    <div class="reward-item">
-                        <div class="item-details">
-                            <span class="material-symbols-outlined">local_mall</span>
-                            <div>
-                                <div>$5 Duty-Free Voucher</div>
-                                <small>1000 pts</small>
-                            </div>
+                    <div class="profile-action-item">
+                        <span class="material-symbols-outlined">logout</span>
+                        <span>Logout</span>
+                    </div>
+                </div>
+            </div>
+        `,
+        settings: `
+            <div class="feature-card">
+                <h2><span class="material-symbols-outlined">settings</span> Settings</h2>
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <div>
+                            <h4>Push Notifications</h4>
+                            <p>Receive updates on flight status and promotions.</p>
                         </div>
-                        <button class="btn">Redeem</button>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="push-notifications" checked>
+                            <label for="push-notifications"></label>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <h4>Email Notifications</h4>
+                            <p>Get booking confirmations and newsletters.</p>
+                        </div>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="email-notifications" checked>
+                            <label for="email-notifications"></label>
+                        </div>
+                    </div>
+                    <div class="setting-item">
+                        <div>
+                            <h4>Dark Mode</h4>
+                            <p>Switch to a dark theme.</p>
+                        </div>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="dark-mode">
+                            <label for="dark-mode"></label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -489,9 +512,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const arrivalForm = document.getElementById('arrival-card-form');
         if(arrivalForm) arrivalForm.addEventListener('submit', (e) => { e.preventDefault(); alert('Arrival card submitted!'); });
 
-        const loungeForm = document.getElementById('lounge-booking-form');
-        if(loungeForm) loungeForm.addEventListener('submit', (e) => { e.preventDefault(); alert('Lounge booked!'); });
-        
         const evPaymentForm = document.getElementById('ev-payment-form');
         if(evPaymentForm) evPaymentForm.addEventListener('submit', (e) => { e.preventDefault(); alert('Payment successful! Charging started.'); });
 
@@ -499,7 +519,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if(carbonForm) carbonForm.addEventListener('submit', (e) => { e.preventDefault(); alert('Thank you for your contribution!'); });
 
         const topUpBtn = document.getElementById('top-up-btn');
-        if(topUpBtn) topUpBtn.addEventListener('click', () => alert('Top Up function coming soon!'));
+        if(topUpBtn) topUpBtn.addEventListener('click', () => loadFeature('top_up'));
+
+        const topUpForm = document.getElementById('top-up-form');
+        if(topUpForm) topUpForm.addEventListener('submit', (e) => { 
+            e.preventDefault(); 
+            const amount = document.getElementById('top-up-amount').value;
+            const selectedPayment = document.querySelector('.payment-method.active');
+            if (amount && selectedPayment) {
+                const method = selectedPayment.dataset.method;
+                alert(`Proceeding to pay ${amount} MMK with ${method}`);
+            } else {
+                alert('Please enter an amount and select a payment method.');
+            }
+        });
+
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', () => {
+                paymentMethods.forEach(m => m.classList.remove('active'));
+                method.classList.add('active');
+            });
+        });
 
         const payBtn = document.getElementById('pay-btn');
         if(payBtn) payBtn.addEventListener('click', () => alert('Pay function coming soon!'));
