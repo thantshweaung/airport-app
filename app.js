@@ -32,6 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="material-symbols-outlined">directions_car</span>
                         <span>Parking</span>
                     </div>
+                    <div class="quick-action-item" data-feature="rewards">
+                        <span class="material-symbols-outlined">military_tech</span>
+                        <span>Rewards</span>
+                    </div>
                 </div>
 
                 <div class="feature-card promotions-card">
@@ -454,6 +458,48 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="profile-action-item">
                         <span class="material-symbols-outlined">logout</span>
                         <span>Logout</span>
+                    </div>
+                </div>
+            </div>
+        `,
+        rewards: `
+            <div class="feature-card">
+                <h2><span class="material-symbols-outlined">military_tech</span> Reward Points</h2>
+                <div class="points-balance">
+                    <span class="balance-label">Your Points</span>
+                    <div class="balance-amount">1,250</div>
+                </div>
+                <div class="reward-list">
+                    <h3 class="list-header">Available Rewards</h3>
+                    <div class="reward-item">
+                        <div class="item-details">
+                            <span class="material-symbols-outlined">coffee</span>
+                            <div>
+                                <div>Free Coffee</div>
+                                <small>Redeem for 200 points</small>
+                            </div>
+                        </div>
+                        <button class="btn">Redeem</button>
+                    </div>
+                    <div class="reward-item">
+                        <div class="item-details">
+                            <span class="material-symbols-outlined">local_mall</span>
+                            <div>
+                                <div>$5 Shopping Voucher</div>
+                                <small>Redeem for 500 points</small>
+                            </div>
+                        </div>
+                        <button class="btn">Redeem</button>
+                    </div>
+                    <div class="reward-item">
+                        <div class="item-details">
+                            <span class="material-symbols-outlined">confirmation_number</span>
+                            <div>
+                                <div>Lounge Access</div>
+                                <small>Redeem for 1000 points</small>
+                            </div>
+                        </div>
+                        <button class="btn">Redeem</button>
                     </div>
                 </div>
             </div>
