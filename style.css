@@ -74,6 +74,7 @@ header p {
 .announcement-container {
     background: var(--accent-color);
     color: var(--light-text-color);
+    margin: 5px 0 0 0;
     padding: 10px 20px;
     text-align: center;
     font-size: 0.9em;
@@ -933,4 +934,27 @@ input:checked + label:before {
     font-size: 0.8em;
     color: #777;
     margin-top: 5px;
+}
+
+.reservation-list {
+    margin-top: 30px;
+}
+
+.reservation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.item-status.confirmed {
+    color: #27AE60;
+    font-weight: 600;
+}
+
+.more-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }

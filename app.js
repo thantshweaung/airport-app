@@ -74,6 +74,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `,
+        flights: `
+            <div class="feature-card flight-status-card">
+                <h2><span class="material-symbols-outlined">flight_takeoff</span> Check Flight Status</h2>
+                <form id="flight-status-form">
+                    <div class="form-group">
+                        <input type="text" id="flight-number-search" placeholder="Enter Flight Number, e.g., 8M 231">
+                    </div>
+                    <button type="submit" class="btn">Search</button>
+                </form>
+            </div>
+        `,
         arrival_card: `
             <div class="feature-card">
                 <h2><span class="material-symbols-outlined">flight_land</span> Digital Arrival Card</h2>
@@ -264,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="duty-free-grid">
                     <div class="shop-card">
-                        <img src="https://images.unsplash.com/photo-1570857502907-181644be3963?q=80&w=400" alt="Cosmetics">
+                        <img src="https://via.placeholder.com/400x400?text=Cosmetics" alt="Cosmetics">
                         <div class="shop-info">
                             <h3>Luxe Cosmetics</h3>
                             <p>Beauty & Fragrance</p>
@@ -272,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                     <div class="shop-card">
-                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=400" alt="Watches">
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=400&auto=format&fit=crop" alt="Watches">
                         <div class="shop-info">
                             <h3>Timepiece Emporium</h3>
                             <p>Watches & Jewelry</p>
@@ -280,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                     <div class="shop-card">
-                        <img src="https://images.unsplash.com/photo-1585589266882-2cb137ba7db6?q=80&w=400" alt="Chocolates">
+                        <img src="https://images.unsplash.com/photo-1585589266882-2cb137ba7db6?q=80&w=400&auto=format&fit=crop" alt="Chocolates">
                         <div class="shop-info">
                             <h3>Sweet Escapes</h3>
                             <p>Chocolates & Souvenirs</p>
@@ -288,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                      <div class="shop-card">
-                        <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=400" alt="Fashion">
+                        <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=400&auto=format&fit=crop" alt="Fashion">
                         <div class="shop-info">
                             <h3>Global Threads</h3>
                             <p>Fashion & Apparel</p>
@@ -620,13 +631,93 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
             </div>
+        `,
+        lounge: `
+            <div class="feature-card">
+                <h2><span class="material-symbols-outlined">deck</span> Lounge Booking</h2>
+                <form id="lounge-booking-form">
+                    <div class="form-group">
+                        <label for="lounge-select">Select Lounge</label>
+                        <select id="lounge-select" required>
+                            <option value="">Select a lounge...</option>
+                            <option value="cip">CIP Lounge</option>
+                            <option value="business">Business Class Lounge</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-date">Date</label>
+                        <input type="date" id="booking-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="booking-time">Time</label>
+                        <input type="time" id="booking-time" required>
+                    </div>
+                    <button type="submit" class="btn">Book Now</button>
+                </form>
+                <div class="reservation-list">
+                    <h3 class="list-header">Your Reservations</h3>
+                    <div class="reservation-item">
+                        <div class="item-details">
+                            <span class="material-symbols-outlined">deck</span>
+                            <div>
+                                <div>CIP Lounge</div>
+                                <small>2025-10-01, 14:00</small>
+                            </div>
+                        </div>
+                        <div class="item-status confirmed">Confirmed</div>
+                    </div>
+                </div>
+            </div>
+        `,
+        more: `
+            <div class="feature-card">
+                <h2><span class="material-symbols-outlined">more_horiz</span> More</h2>
+                <div class="home-grid">
+                    <div class="home-item" data-feature="arrival_card">
+                        <span class="material-symbols-outlined">flight_land</span>
+                        <span>Arrival Card</span>
+                    </div>
+                    <div class="home-item" data-feature="lounge">
+                        <span class="material-symbols-outlined">deck</span>
+                        <span>Lounge</span>
+                    </div>
+                    <div class="home-item" data-feature="ev_charging">
+                        <span class="material-symbols-outlined">ev_station</span>
+                        <span>EV Charging</span>
+                    </div>
+                    <div class="home-item" data-feature="carbon_offset">
+                        <span class="material-symbols-outlined">public</span>
+                        <span>Carbon Offset</span>
+                    </div>
+                    <div class="home-item" data-feature="map">
+                        <span class="material-symbols-outlined">map</span>
+                        <span>Airport Map</span>
+                    </div>
+                    <div class="home-item" data-feature="rewards">
+                        <span class="material-symbols-outlined">military_tech</span>
+                        <span>Rewards</span>
+                    </div>
+                    <div class="home-item" data-feature="custom_declaration">
+                        <span class="material-symbols-outlined">description</span>
+                        <span>Customs</span>
+                    </div>
+                    <div class="home-item" data-feature="profile">
+                        <span class="material-symbols-outlined">person</span>
+                        <span>Profile</span>
+                    </div>
+                    <div class="home-item" data-feature="settings">
+                        <span class="material-symbols-outlined">settings</span>
+                        <span>Settings</span>
+                    </div>
+                </div>
+            </div>
         `
     };
 
     function loadFeature(featureName) {
         mainContent.innerHTML = features[featureName];
         
-        if (featureName === 'home') {
+        if (featureName === 'home' || featureName === 'more') {
             backBtn.style.display = 'none';
             headerText.style.textAlign = 'center';
         } else {
@@ -743,6 +834,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert(`Filtering by: ${btn.dataset.filter}`);
             });
         });
+
+        const loungeBookingForm = document.getElementById('lounge-booking-form');
+        if(loungeBookingForm) loungeBookingForm.addEventListener('submit', (e) => { e.preventDefault(); alert('Lounge booked successfully!'); });
     }
 
     function showFlightStatus(flightNumber) {
@@ -864,7 +958,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         if (announcement) {
-            announcementContainer.innerHTML = `<strong>${announcement.title}:</strong> ${announcement.message}`;
+            announcementContainer.innerHTML = `<marquee><strong>${announcement.title}:</strong> ${announcement.message}</marquee>`;
             announcementContainer.style.display = 'block';
         } else {
             announcementContainer.style.display = 'none';

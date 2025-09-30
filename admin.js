@@ -193,6 +193,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 </table>
             </div>
         `,
+        lounge_bookings: `
+            <div class="page-header"><h1>Lounge Bookings</h1></div>
+            <div class="data-table-container">
+                <div class="table-header"><h2>All Bookings</h2></div>
+                <table>
+                    <thead><tr><th>User</th><th>Lounge</th><th>Date</th><th>Time</th><th>Status</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        <tr><td>thantshweaung@example.com</td><td>CIP Lounge</td><td>2025-10-01</td><td>14:00</td><td>Confirmed</td><td><div class="action-buttons"><button class="view-booking-btn"><span class="material-symbols-outlined">visibility</span></button></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        `,
+        duty_free: `
+            <div class="page-header"><h1>Duty-Free Management</h1></div>
+            <div class="data-table-container">
+                <div class="table-header">
+                    <h2>Shops & Products</h2>
+                    <button class="btn add-shop-btn">Add New Shop</button>
+                </div>
+                <table>
+                    <thead><tr><th>Shop</th><th>Category</th><th>Location</th><th>Actions</th></tr></thead>
+                    <tbody>
+                        <tr><td>Luxe Cosmetics</td><td>Beauty & Fragrance</td><td>T1, Near Gate 5</td><td><div class="action-buttons"><button class="edit-shop-btn"><span class="material-symbols-outlined">edit</span></button><button class="delete-btn"><span class="material-symbols-outlined">delete</span></button></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        `,
         settings: `
             <div class="page-header"><h1>Settings</h1></div>
             <p>Settings page is under construction.</p>
@@ -465,6 +492,62 @@ document.addEventListener('DOMContentLoaded', () => {
         openModal(form);
     }
 
+    function renderViewBooking(bookingData) {
+        const content = `
+            <h2>Booking Details</h2>
+            <p><strong>User:</strong> ${bookingData.user}</p>
+            <p><strong>Lounge:</strong> ${bookingData.lounge}</p>
+            <p><strong>Date:</strong> ${bookingData.date}</p>
+            <p><strong>Time:</strong> ${bookingData.time}</p>
+            <p><strong>Status:</strong> ${bookingData.status}</p>
+        `;
+        openModal(content);
+    }
+
+    function renderAddShopForm() {
+        const form = `
+            <h2>Add New Shop</h2>
+            <form class="modal-form">
+                <div class="form-group">
+                    <label for="shop-name">Shop Name</label>
+                    <input type="text" id="shop-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="shop-category">Category</label>
+                    <input type="text" id="shop-category" required>
+                </div>
+                <div class="form-group">
+                    <label for="shop-location">Location</label>
+                    <input type="text" id="shop-location" required>
+                </div>
+                <button type="submit" class="btn">Add Shop</button>
+            </form>
+        `;
+        openModal(form);
+    }
+
+    function renderEditShopForm(shopData) {
+        const form = `
+            <h2>Edit Shop: ${shopData.name}</h2>
+            <form class="modal-form">
+                <div class="form-group">
+                    <label for="shop-name">Shop Name</label>
+                    <input type="text" id="shop-name" value="${shopData.name}" required>
+                </div>
+                <div class="form-group">
+                    <label for="shop-category">Category</label>
+                    <input type="text" id="shop-category" value="${shopData.category}" required>
+                </div>
+                <div class="form-group">
+                    <label for="shop-location">Location</label>
+                    <input type="text" id="shop-location" value="${shopData.location}" required>
+                </div>
+                <button type="submit" class="btn">Save Changes</button>
+            </form>
+        `;
+        openModal(form);
+    }
+
     function createCharts() {
         const flightStatusCtx = document.getElementById('flightStatusChart').getContext('2d');
         new Chart(flightStatusCtx, {
@@ -696,6 +779,50 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.addEventListener('click', () => {
                     if(confirm('Are you sure you want to delete this announcement?')) {
                         alert('Announcement deleted!');
+                    }
+                });
+            });
+        }
+
+        if (sectionName === 'lounge_bookings') {
+            const viewBookingBtns = document.querySelectorAll('.view-booking-btn');
+            viewBookingBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const row = e.currentTarget.closest('tr');
+                    const bookingData = {
+                        user: row.cells[0].textContent,
+                        lounge: row.cells[1].textContent,
+                        date: row.cells[2].textContent,
+                        time: row.cells[3].textContent,
+                        status: row.cells[4].textContent,
+                    };
+                    renderViewBooking(bookingData);
+                });
+            });
+        }
+
+        if (sectionName === 'duty_free') {
+            const addShopBtn = document.querySelector('.add-shop-btn');
+            addShopBtn.addEventListener('click', renderAddShopForm);
+
+            const editShopBtns = document.querySelectorAll('.edit-shop-btn');
+            editShopBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const row = e.currentTarget.closest('tr');
+                    const shopData = {
+                        name: row.cells[0].textContent,
+                        category: row.cells[1].textContent,
+                        location: row.cells[2].textContent,
+                    };
+                    renderEditShopForm(shopData);
+                });
+            });
+
+            const deleteBtns = document.querySelectorAll('.delete-btn');
+            deleteBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if(confirm('Are you sure you want to delete this shop?')) {
+                        alert('Shop deleted!');
                     }
                 });
             });
