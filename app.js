@@ -36,6 +36,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="material-symbols-outlined">military_tech</span>
                         <span>Rewards</span>
                     </div>
+                    <div class="quick-action-item" data-feature="custom_declaration">
+                        <span class="material-symbols-outlined">description</span>
+                        <span>Customs</span>
+                    </div>
                 </div>
 
                 <div class="feature-card promotions-card">
@@ -462,6 +466,82 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `,
+        custom_declaration: `
+            <div class="feature-card">
+                <h2><span class="material-symbols-outlined">description</span> Passenger Declaration Form</h2>
+                <p>Please fill in Block Letters</p>
+                <form id="custom-declaration-form">
+                    <div class="form-group">
+                        <label for="cd-full-name">Name</label>
+                        <input type="text" id="cd-full-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cd-passport-number">Passport No.</label>
+                        <input type="text" id="cd-passport-number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cd-nationality">Nationality</label>
+                        <input type="text" id="cd-nationality" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cd-dob">Date of Birth (D/M/Y)</label>
+                        <input type="text" id="cd-dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cd-occupation">Occupation</label>
+                        <input type="text" id="cd-occupation" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cd-flight-number">Flight No./Vessel</label>
+                        <input type="text" id="cd-flight-number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cd-from">From</label>
+                        <input type="text" id="cd-from" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cd-date-arrival">Date of arrival</label>
+                        <input type="date" id="cd-date-arrival" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>1. Do you have dutiable, prohibited, restricted goods to declare?</label>
+                        <div class="channel-selection">
+                            <button type="button" class="btn red-channel">Red Channel (Goods to Declare)</button>
+                            <button type="button" class="btn green-channel">Green Channel (Nothing to Declare)</button>
+                        </div>
+                        <p class="channel-info">If you are in doubt, please proceed through the Red channel.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>2. Are you bringing foreign currency over US$ 10000 or equivalent?</label>
+                        <select id="cd-currency" required>
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                        <input type="text" id="cd-currency-amount" placeholder="Amount" style="display: none; margin-top: 10px;">
+                        <p class="info-text">If yes, declare to Customs and take back FED (Foreign Exchange Declaration) form.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>3. Do you have any valuable articles including gold, jewellery etc. for temporary admission?</label>
+                        <select id="cd-valuables" required>
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                        <p class="info-text">If yes, please declare on the reverse side.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cd-signature">Signature</label>
+                        <input type="text" id="cd-signature" required>
+                        <p class="info-text">I have read the NOTICE and certify that this declaration is true and correct.</p>
+                    </div>
+
+                    <button type="submit" class="btn">Submit Declaration</button>
+                </form>
+            </div>
+        `,
         rewards: `
             <div class="feature-card">
                 <h2><span class="material-symbols-outlined">military_tech</span> Reward Points</h2>
@@ -563,6 +643,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const carbonForm = document.getElementById('carbon-offset-form');
         if(carbonForm) carbonForm.addEventListener('submit', (e) => { e.preventDefault(); alert('Thank you for your contribution!'); });
+
+        const customDeclarationForm = document.getElementById('custom-declaration-form');
+        if(customDeclarationForm) {
+            customDeclarationForm.addEventListener('submit', (e) => { e.preventDefault(); alert('Customs Declaration Submitted!'); });
+
+            const currencySelect = document.getElementById('cd-currency');
+            const currencyAmount = document.getElementById('cd-currency-amount');
+            currencySelect.addEventListener('change', () => {
+                if (currencySelect.value === 'yes') {
+                    currencyAmount.style.display = 'block';
+                } else {
+                    currencyAmount.style.display = 'none';
+                }
+            });
+
+            const redChannelBtn = document.querySelector('.red-channel');
+            const greenChannelBtn = document.querySelector('.green-channel');
+
+            redChannelBtn.addEventListener('click', () => {
+                alert('Please proceed to the Red Channel for inspection.');
+            });
+
+            greenChannelBtn.addEventListener('click', () => {
+                alert('You may proceed through the Green Channel.');
+            });
+        }
 
         const topUpBtn = document.getElementById('top-up-btn');
         if(topUpBtn) topUpBtn.addEventListener('click', () => loadFeature('top_up'));

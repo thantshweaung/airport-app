@@ -906,3 +906,23 @@ input:checked + label:before {
     font-weight: 600;
     font-size: 0.9em;
 }
+
+.channel-selection {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.red-channel {
+    background: #E74C3C;
+}
+
+.green-channel {
+    background: #27AE60;
+}
+
+.channel-info, .info-text {
+    font-size: 0.8em;
+    color: #777;
+    margin-top: 5px;
+}
