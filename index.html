@@ -2,64 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Airport App</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-    <div class="app-container">
+    <div class="phone-frame">
+        <div class="phone-screen">
+            <div class="status-bar">
+                <div class="status-left">
+                    <span class="time">9:41</span>
+                </div>
+                <div class="status-right">
+                    <span class="signal">📶</span>
+                    <span class="wifi">📶</span>
+                    <span class="battery">🔋</span>
+                </div>
+            </div>
+            <div class="app-container">
         <header>
             <div class="header-content">
                 <span class="material-symbols-outlined back-btn" id="back-btn" style="display: none;">arrow_back_ios</span>
-                            <div class="header-text">
-                                <h1>Yangon Int'l Airport</h1>
-                                <p>Your seamless travel companion</p>
-                            </div>
-                        </div>
-                    </header>
+                <div class="header-text">
+                    <h1>Yangon Int'l Airport</h1>
+                    <p>Your seamless travel companion</p>
+                </div>
+                <div class="cart-icon" id="cart-icon">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <span class="cart-count" id="cart-count">0</span>
+                </div>
+            </div>
+        </header>
                     <div class="announcement-container" id="announcement-container"></div>
                     <main id="main-content">            <!-- Feature content will be loaded here -->
         </main>
         <div class="ai-assistant-btn" id="ai-assistant-btn">
             <span class="material-symbols-outlined">smart_toy</span>
         </div>
-        <nav class="bottom-nav">
-            <a href="#" class="nav-item active" data-feature="home">
-                <span class="material-symbols-outlined">home</span>
-                <span class="nav-text">Home</span>
-            </a>
-            <a href="#" class="nav-item" data-feature="flights">
-                <span class="material-symbols-outlined">flight</span>
-                <span class="nav-text">Flights</span>
-            </a>
-            <a href="#" class="nav-item" data-feature="wallet">
-                <span class="material-symbols-outlined">account_balance_wallet</span>
-                <span class="nav-text">Wallet</span>
-            </a>
-            <a href="#" class="nav-item" data-feature="duty_free">
-                <span class="material-symbols-outlined">storefront</span>
-                <span class="nav-text">Shop</span>
-            </a>
-            <a href="#" class="nav-item" data-feature="more">
-                <span class="material-symbols-outlined">more_horiz</span>
-                <span class="nav-text">More</span>
-            </a>
-        </nav>
+                    <nav class="bottom-nav">
+                        <a href="#" class="nav-item active" data-feature="home">
+                            <span class="material-symbols-outlined">home</span>
+                            <span class="nav-text" data-translate="home">Home</span>
+                        </a>
+                        <a href="#" class="nav-item" data-feature="profile">
+                            <span class="material-symbols-outlined">person</span>
+                            <span class="nav-text" data-translate="profile">Profile</span>
+                        </a>
+                        <a href="#" class="nav-item" data-feature="settings">
+                            <span class="material-symbols-outlined">settings</span>
+                            <span class="nav-text" data-translate="settings">Settings</span>
+                        </a>
+                    </nav>
+            </div>
+            <div class="ai-chat-container" id="ai-chat-container">
+                <div class="ai-chat-header">
+                    <h2>AI Assistant</h2>
+                    <span class="material-symbols-outlined close-btn" id="close-chat-btn">close</span>
+                </div>
+                <div class="ai-chat-box" id="ai-chat-box">
+                    <div class="chat-message bot">Hello! How can I help you today?</div>
+                </div>
+                <div class="ai-chat-input">
+                    <input type="text" id="chat-input" placeholder="Ask about flights, directions...">
+                    <button id="send-chat-btn"><span class="material-symbols-outlined">send</span></button>
+                </div>
+            </div>
+            <div class="modal" id="product-modal">
+                <div class="modal-content">
+                    <span class="close-modal" id="close-modal">&times;</span>
+                    <h2 id="modal-shop-name"></h2>
+                    <div id="modal-product-list"></div>
+                </div>
+            </div>
+
+            <!-- Custom Alert Modal -->
+            <div class="alert-modal" id="alert-modal">
+                <div class="alert-modal-content">
+                    <div class="alert-modal-header">
+                        <span class="material-symbols-outlined alert-icon" id="alert-icon">info</span>
+                        <h3 id="alert-title">Alert</h3>
+                    </div>
+                    <div class="alert-modal-body">
+                        <p id="alert-message">Message</p>
+                    </div>
+                    <div class="alert-modal-footer">
+                        <button class="alert-btn alert-btn-primary" id="alert-confirm">OK</button>
+                        <button class="alert-btn alert-btn-secondary" id="alert-cancel" style="display: none;">Cancel</button>
+                    </div>
+                </div>
+            </div>
+            <div class="home-indicator"></div>
+        </div>
     </div>
+    <script src="languages.js"></script>
+    <script src="shops.js"></script>
     <script src="app.js"></script>
-    <div class="ai-chat-container" id="ai-chat-container">
-        <div class="ai-chat-header">
-            <h2>AI Assistant</h2>
-            <span class="material-symbols-outlined close-btn" id="close-chat-btn">close</span>
-        </div>
-        <div class="ai-chat-box" id="ai-chat-box">
-            <div class="chat-message bot">Hello! How can I help you today?</div>
-        </div>
-        <div class="ai-chat-input">
-            <input type="text" id="chat-input" placeholder="Ask about flights, directions...">
-            <button id="send-chat-btn"><span class="material-symbols-outlined">send</span></button>
-        </div>
-    </div>
 </body>
 </html>

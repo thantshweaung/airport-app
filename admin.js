@@ -10,32 +10,44 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="page-header"><h1>Dashboard</h1></div>
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="icon" style="background: #2980B9;"><span class="material-symbols-outlined">flight</span></div>
-                    <div class="info">
-                        <h3>152</h3>
-                        <p>Flights Today</p>
+                    <div class="stat-card-header">
+                        <div class="icon" style="background: #2980B9;"><span class="material-symbols-outlined">flight</span></div>
+                        <div class="stat-card-info">
+                            <h3>152</h3>
+                            <p>Flights Today</p>
+                        </div>
                     </div>
+                    <div class="stat-card-footer">+5% from yesterday</div>
                 </div>
                 <div class="stat-card">
-                    <div class="icon" style="background: #27AE60;"><span class="material-symbols-outlined">group</span></div>
-                    <div class="info">
-                        <h3>1,280</h3>
-                        <p>Active Users</p>
+                    <div class="stat-card-header">
+                        <div class="icon" style="background: #27AE60;"><span class="material-symbols-outlined">group</span></div>
+                        <div class="stat-card-info">
+                            <h3>1,280</h3>
+                            <p>Active Users</p>
+                        </div>
                     </div>
+                    <div class="stat-card-footer">+20 new users</div>
                 </div>
                 <div class="stat-card">
-                    <div class="icon" style="background: #F39C12;"><span class="material-symbols-outlined">campaign</span></div>
-                    <div class="info">
-                        <h3>5</h3>
-                        <p>Active Promotions</p>
+                    <div class="stat-card-header">
+                        <div class="icon" style="background: #F39C12;"><span class="material-symbols-outlined">campaign</span></div>
+                        <div class="stat-card-info">
+                            <h3>5</h3>
+                            <p>Active Promotions</p>
+                        </div>
                     </div>
+                    <div class="stat-card-footer">2 expiring soon</div>
                 </div>
                 <div class="stat-card">
-                    <div class="icon" style="background: #8E44AD;"><span class="material-symbols-outlined">description</span></div>
-                    <div class="info">
-                        <h3>45</h3>
-                        <p>Arrivals Today</p>
+                    <div class="stat-card-header">
+                        <div class="icon" style="background: #8E44AD;"><span class="material-symbols-outlined">description</span></div>
+                        <div class="stat-card-info">
+                            <h3>45</h3>
+                            <p>Arrivals Today</p>
+                        </div>
                     </div>
+                    <div class="stat-card-footer">10 pending approval</div>
                 </div>
             </div>
             <div class="dashboard-grid">
@@ -98,16 +110,35 @@ document.addEventListener('DOMContentLoaded', () => {
                 </table>
             </div>
         `,
-        arrivals: `
-            <div class="page-header"><h1>Arrival Cards</h1></div>
-             <div class="data-table-container">
-                <div class="table-header"><h2>Recent Submissions</h2></div>
-                <table>
-                    <thead><tr><th>Name</th><th>Passport No.</th><th>Flight No.</th><th>Submitted At</th><th>Actions</th></tr></thead>
-                    <tbody>
-                        <tr><td>Jane Doe</td><td>K1234567</td><td>8M 231</td><td>2025-09-30 10:30</td><td><div class="action-buttons"><button class="view-arrival-btn"><span class="material-symbols-outlined">visibility</span></button></div></td></tr>
-                    </tbody>
-                </table>
+        arrivals_customs: `
+            <div class="page-header"><h1>Arrivals & Customs</h1></div>
+            <div class="tab-container">
+                <div class="tab-header">
+                    <button class="tab-link active" data-tab="arrival-cards">Arrival Cards</button>
+                    <button class="tab-link" data-tab="custom-duty">Custom Duty</button>
+                </div>
+                <div id="arrival-cards" class="tab-content active">
+                    <div class="data-table-container">
+                        <div class="table-header"><h2>Recent Submissions</h2></div>
+                        <table>
+                            <thead><tr><th>Name</th><th>Passport No.</th><th>Flight No.</th><th>Submitted At</th><th>Actions</th></tr></thead>
+                            <tbody>
+                                <tr><td>Jane Doe</td><td>K1234567</td><td>8M 231</td><td>2025-09-30 10:30</td><td><div class="action-buttons"><button class="view-arrival-btn"><span class="material-symbols-outlined">visibility</span></button></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="custom-duty" class="tab-content">
+                    <div class="data-table-container">
+                        <div class="table-header"><h2>Duty Declarations</h2></div>
+                        <table>
+                            <thead><tr><th>Name</th><th>Passport No.</th><th>Flight No.</th><th>Declared Items</th><th>Actions</th></tr></thead>
+                            <tbody>
+                                <tr><td>John Smith</td><td>A9876543</td><td>SQ 51</td><td>Electronics, Perfume</td><td><div class="action-buttons"><button class="view-duty-btn"><span class="material-symbols-outlined">visibility</span></button></div></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         `,
         wallet: `
@@ -206,18 +237,38 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `,
         duty_free: `
-            <div class="page-header"><h1>Duty-Free Management</h1></div>
-            <div class="data-table-container">
-                <div class="table-header">
-                    <h2>Shops & Products</h2>
-                    <button class="btn add-shop-btn">Add New Shop</button>
+            <div class="page-header"><h1>Duty-Free Shops</h1></div>
+            <div class="toolbar">
+                <input type="text" placeholder="Search for shops or products...">
+            </div>
+            <div class="category-grid">
+                <div class="category-card">
+                    <img src="https://placehold.co/100x100" alt="Cosmetics">
+                    <div class="category-info">
+                        <h3>Cosmetics</h3>
+                        <p>Luxe Cosmetics</p>
+                        <p>Beauty & Fragrance</p>
+                        <p>T1, Near Gate 5</p>
+                    </div>
                 </div>
-                <table>
-                    <thead><tr><th>Shop</th><th>Category</th><th>Location</th><th>Actions</th></tr></thead>
-                    <tbody>
-                        <tr><td>Luxe Cosmetics</td><td>Beauty & Fragrance</td><td>T1, Near Gate 5</td><td><div class="action-buttons"><button class="edit-shop-btn"><span class="material-symbols-outlined">edit</span></button><button class="delete-btn"><span class="material-symbols-outlined">delete</span></button></div></td></tr>
-                    </tbody>
-                </table>
+                <div class="category-card">
+                    <img src="https://placehold.co/100x100" alt="Watches">
+                    <div class="category-info">
+                        <h3>Watches</h3>
+                        <p>Timepiece Emporium</p>
+                        <p>Watches & Jewelry</p>
+                        <p>T1, Concourse A</p>
+                    </div>
+                </div>
+                <div class="category-card">
+                    <img src="https://placehold.co/100x100" alt="Chocolates">
+                    <div class="category-info">
+                        <h3>Chocolates</h3>
+                        <p>Sweet Delights</p>
+                        <p>Confectionery</p>
+                        <p>T1, Near Gate 8</p>
+                    </div>
+                </div>
             </div>
         `,
         settings: `
@@ -342,6 +393,17 @@ document.addEventListener('DOMContentLoaded', () => {
             <p><strong>Passport No:</strong> ${arrivalData.passport}</p>
             <p><strong>Flight No:</strong> ${arrivalData.flightNo}</p>
             <p><strong>Submitted At:</strong> ${arrivalData.submittedAt}</p>
+        `;
+        openModal(content);
+    }
+
+    function renderViewDuty(dutyData) {
+        const content = `
+            <h2>Custom Duty Details</h2>
+            <p><strong>Name:</strong> ${dutyData.name}</p>
+            <p><strong>Passport No:</strong> ${dutyData.passport}</p>
+            <p><strong>Flight No:</strong> ${dutyData.flightNo}</p>
+            <p><strong>Declared Items:</strong> ${dutyData.items}</p>
         `;
         openModal(content);
     }
@@ -531,6 +593,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <h2>Edit Shop: ${shopData.name}</h2>
             <form class="modal-form">
                 <div class="form-group">
+                    <label for="shop-image">Image URL</label>
+                    <input type="text" id="shop-image" value="${shopData.image}" required>
+                </div>
+                <div class="form-group">
                     <label for="shop-name">Shop Name</label>
                     <input type="text" id="shop-name" value="${shopData.name}" required>
                 </div>
@@ -551,41 +617,50 @@ document.addEventListener('DOMContentLoaded', () => {
     function createCharts() {
         const flightStatusCtx = document.getElementById('flightStatusChart').getContext('2d');
         new Chart(flightStatusCtx, {
-            type: 'doughnut',
+            type: 'pie',
             data: {
                 labels: ['On Time', 'Delayed', 'Cancelled'],
                 datasets: [{
                     label: 'Flight Status',
                     data: [120, 20, 12],
-                    backgroundColor: ['#2ECC71', '#F1C40F', '#E74C3C'],
+                    backgroundColor: ['#4CAF50', '#FFC107', '#F44336'],
                 }]
             }
         });
 
         const userEngagementCtx = document.getElementById('userEngagementChart').getContext('2d');
+        const userEngagementGradient = userEngagementCtx.createLinearGradient(0, 0, 0, 400);
+        userEngagementGradient.addColorStop(0, 'rgba(52, 152, 219, 0.5)');
+        userEngagementGradient.addColorStop(1, 'rgba(52, 152, 219, 0)');
+
         new Chart(userEngagementCtx, {
-            type: 'bar',
+            type: 'line',
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                 datasets: [{
                     label: 'Active Users',
                     data: [650, 720, 800, 750, 900, 1280],
-                    backgroundColor: '#3498DB',
+                    backgroundColor: userEngagementGradient,
+                    borderColor: '#3498DB',
+                    tension: 0.4,
+                    fill: true
                 }]
             }
         });
 
         const revenueCtx = document.getElementById('revenueChart').getContext('2d');
         new Chart(revenueCtx, {
-            type: 'line',
+            type: 'bar',
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                labels: ['Lounge', 'Parking', 'Duty-Free', 'EV Charging'],
                 datasets: [{
                     label: 'Revenue (in K)',
-                    data: [500, 550, 620, 700, 800, 950],
-                    borderColor: '#27AE60',
-                    tension: 0.1
+                    data: [450, 250, 150, 100],
+                    backgroundColor: ['#1ABC9C', '#3498DB', '#9B59B6', '#F1C40F'],
                 }]
+            },
+            options: {
+                indexAxis: 'y',
             }
         });
     }
@@ -665,7 +740,22 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        if (sectionName === 'arrivals') {
+        if (sectionName === 'arrivals_customs') {
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    const tab = link.dataset.tab;
+
+                    tabLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    document.getElementById(tab).classList.add('active');
+                });
+            });
+
             const viewArrivalBtns = document.querySelectorAll('.view-arrival-btn');
             viewArrivalBtns.forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -677,6 +767,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         submittedAt: row.cells[3].textContent,
                     };
                     renderViewArrival(arrivalData);
+                });
+            });
+
+            const viewDutyBtns = document.querySelectorAll('.view-duty-btn');
+            viewDutyBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const row = e.currentTarget.closest('tr');
+                    const dutyData = {
+                        name: row.cells[0].textContent,
+                        passport: row.cells[1].textContent,
+                        flightNo: row.cells[2].textContent,
+                        items: row.cells[3].textContent,
+                    };
+                    renderViewDuty(dutyData);
                 });
             });
         }
@@ -810,9 +914,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.addEventListener('click', (e) => {
                     const row = e.currentTarget.closest('tr');
                     const shopData = {
-                        name: row.cells[0].textContent,
-                        category: row.cells[1].textContent,
-                        location: row.cells[2].textContent,
+                        image: row.cells[0].querySelector('img').src,
+                        name: row.cells[1].textContent,
+                        category: row.cells[2].textContent,
+                        location: row.cells[3].textContent,
                     };
                     renderEditShopForm(shopData);
                 });

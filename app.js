@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Load saved language first
+    loadLanguage();
+    
     const mainContent = document.getElementById('main-content');
     const navItems = document.querySelectorAll('.nav-item');
     const backBtn = document.getElementById('back-btn');
@@ -13,63 +16,106 @@ document.addEventListener('DOMContentLoaded', () => {
     const features = {
         home: `
             <div class="home-dashboard">
-                <div class="feature-card flight-status-card">
-                    <h2><span class="material-symbols-outlined">flight_takeoff</span> Check Flight Status</h2>
-                    <form id="flight-status-form">
-                        <div class="form-group">
-                            <input type="text" id="flight-number-search" placeholder="Enter Flight Number, e.g., 8M 231">
+                <div class="cards-carousel">
+                    <div class="carousel-container">
+                        <div class="carousel-track">
+                            <div class="carousel-slide active">
+                                <div class="feature-card flight-status-card">
+                                    <h2><span class="material-symbols-outlined">flight_takeoff</span> <span data-translate="checkFlightStatus">Check Flight Status</span></h2>
+                                    <form id="flight-status-form">
+                                        <div class="form-group">
+                                            <input type="text" id="flight-number-search" placeholder="Enter Flight Number, e.g., 8M 231">
+                                        </div>
+                                        <button type="submit" class="btn">Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                            <div class="carousel-slide">
+                                <div class="feature-card promotions-card">
+                                    <div class="promotion-header">
+                                        <div class="promotion-icon">
+                                            <span class="material-symbols-outlined">campaign</span>
+                                        </div>
+                                        <div class="promotion-content">
+                                            <h2 data-translate="promotions">Special Offer</h2>
+                                            <p class="promotion-title">10% Off Restaurant Dining</p>
+                                            <p class="promotion-description">Enjoy exclusive discounts at select restaurants when you pay with your app wallet!</p>
+                                        </div>
+                                    </div>
+                                    <div class="promotion-footer">
+                                        <div class="promotion-badge">
+                                            <span class="material-symbols-outlined">local_offer</span>
+                                            <span>Limited Time</span>
+                                        </div>
+                                        <button class="btn promotion-btn" data-translate="learnMore">Learn More</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="carousel-slide">
+                                <div class="feature-card ad-card">
+                                    <div class="ad-badge">Ad</div>
+                                    <h3>Fast & Reliable Airport Taxi</h3>
+                                    <p>Book your ride to the city instantly. Safe, comfortable, and fixed prices.</p>
+                                    <button class="btn ad-btn">Book Now</button>
+                                </div>
+                            </div>
                         </div>
-                        <button type="submit" class="btn">Search</button>
-                    </form>
+                    </div>
+                    
+                    <div class="carousel-indicators">
+                        <span class="indicator active" data-slide="0"></span>
+                        <span class="indicator" data-slide="1"></span>
+                        <span class="indicator" data-slide="2"></span>
+                    </div>
                 </div>
 
-                <div class="quick-actions-grid">
-                     <div class="quick-action-item" data-feature="wallet">
+                <div class="unified-services-grid">
+                    <div class="service-item primary" data-feature="wallet">
                         <span class="material-symbols-outlined">account_balance_wallet</span>
                         <span>Wallet</span>
+                        <small>Manage payments</small>
                     </div>
-                    <div class="quick-action-item" data-feature="parking">
+                    <div class="service-item" data-feature="parking">
                         <span class="material-symbols-outlined">directions_car</span>
                         <span>Parking</span>
+                        <small>Find spots</small>
                     </div>
-                    <div class="quick-action-item" data-feature="rewards">
+                    <div class="service-item" data-feature="rewards">
                         <span class="material-symbols-outlined">military_tech</span>
                         <span>Rewards</span>
+                        <small>Earn points</small>
                     </div>
-                    <div class="quick-action-item" data-feature="custom_declaration">
-                        <span class="material-symbols-outlined">description</span>
-                        <span>Customs</span>
-                    </div>
-                </div>
-
-                <div class="feature-card promotions-card">
-                     <h2><span class="material-symbols-outlined">campaign</span> Promotions</h2>
-                     <p>Enjoy a 10% discount at select restaurants when you pay with your app wallet!</p>
-                </div>
-
-                <div class="feature-card ad-card">
-                    <div class="ad-badge">Ad</div>
-                    <h3>Fast & Reliable Airport Taxi</h3>
-                    <p>Book your ride to the city instantly. Safe, comfortable, and fixed prices.</p>
-                    <button class="btn ad-btn">Book Now</button>
-                </div>
-
-                <div class="home-grid">
-                    <div class="home-item" data-feature="arrival_card">
+                    <div class="service-item" data-feature="arrival_customs">
                         <span class="material-symbols-outlined">flight_land</span>
-                        <span>Arrival Card</span>
+                        <span>Arrival</span>
+                        <small>Customs form</small>
                     </div>
-                    <div class="home-item" data-feature="ev_charging">
+                    <div class="service-item" data-feature="ev_charging">
                         <span class="material-symbols-outlined">ev_station</span>
-                        <span>EV Charging</span>
+                        <span>EV Charge</span>
+                        <small>Electric vehicles</small>
                     </div>
-                    <div class="home-item" data-feature="carbon_offset">
+                    <div class="service-item" data-feature="carbon_offset">
                         <span class="material-symbols-outlined">public</span>
-                        <span>Carbon Offset</span>
+                        <span>Carbon</span>
+                        <small>Offset emissions</small>
                     </div>
-                    <div class="home-item" data-feature="map">
+                    <div class="service-item" data-feature="map">
                         <span class="material-symbols-outlined">map</span>
                         <span>Airport Map</span>
+                        <small>Navigate</small>
+                    </div>
+                    <div class="service-item" data-feature="shops">
+                        <span class="material-symbols-outlined">storefront</span>
+                        <span>Shops</span>
+                        <small>Browse stores</small>
+                    </div>
+                    <div class="service-item" data-feature="lounge">
+                        <span class="material-symbols-outlined">deck</span>
+                        <span>Lounge</span>
+                        <small>Book access</small>
                     </div>
                 </div>
             </div>
@@ -85,10 +131,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 </form>
             </div>
         `,
-        arrival_card: `
+        arrival_customs: `
             <div class="feature-card">
                 <h2><span class="material-symbols-outlined">flight_land</span> Digital Arrival Card</h2>
+                <div class="form-controls">
+                    <button type="button" class="btn btn-secondary" id="autofill-btn">
+                        <span class="material-symbols-outlined">auto_fix_high</span>
+                        Autofill
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="clear-form-btn">
+                        <span class="material-symbols-outlined">clear_all</span>
+                        Clear
+                    </button>
+                </div>
                 <form id="arrival-card-form">
+                    <div class="form-group">
+                        <label for="applicant-type">Who is filling this form?</label>
+                        <select id="applicant-type" required>
+                            <option value="">Select...</option>
+                            <option value="me">Me (I am the traveler)</option>
+                            <option value="other">Other person (I am filling for someone else)</option>
+                        </select>
+                    </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="family-name">Family Name</label>
@@ -267,48 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `,
-        duty_free: `
-            <div class="feature-card">
-                <h2><span class="material-symbols-outlined">storefront</span> Duty-Free Shops</h2>
-                <div class="form-group">
-                    <input type="text" id="duty-free-search" placeholder="Search for shops or products...">
-                </div>
-                <div class="duty-free-grid">
-                    <div class="shop-card">
-                        <img src="https://via.placeholder.com/400x400?text=Cosmetics" alt="Cosmetics">
-                        <div class="shop-info">
-                            <h3>Luxe Cosmetics</h3>
-                            <p>Beauty & Fragrance</p>
-                            <span>T1, Near Gate 5</span>
-                        </div>
-                    </div>
-                    <div class="shop-card">
-                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=400&auto=format&fit=crop" alt="Watches">
-                        <div class="shop-info">
-                            <h3>Timepiece Emporium</h3>
-                            <p>Watches & Jewelry</p>
-                            <span>T1, Concourse A</span>
-                        </div>
-                    </div>
-                    <div class="shop-card">
-                        <img src="https://images.unsplash.com/photo-1585589266882-2cb137ba7db6?q=80&w=400&auto=format&fit=crop" alt="Chocolates">
-                        <div class="shop-info">
-                            <h3>Sweet Escapes</h3>
-                            <p>Chocolates & Souvenirs</p>
-                            <span>T2, Near Check-in</span>
-                        </div>
-                    </div>
-                     <div class="shop-card">
-                        <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=400&auto=format&fit=crop" alt="Fashion">
-                        <div class="shop-info">
-                            <h3>Global Threads</h3>
-                            <p>Fashion & Apparel</p>
-                            <span>T1, After Security</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `,
+
         parking: `
             <div class="feature-card">
                 <h2><span class="material-symbols-outlined">directions_car</span> Car Park Availability</h2>
@@ -477,82 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `,
-        custom_declaration: `
-            <div class="feature-card">
-                <h2><span class="material-symbols-outlined">description</span> Passenger Declaration Form</h2>
-                <p>Please fill in Block Letters</p>
-                <form id="custom-declaration-form">
-                    <div class="form-group">
-                        <label for="cd-full-name">Name</label>
-                        <input type="text" id="cd-full-name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cd-passport-number">Passport No.</label>
-                        <input type="text" id="cd-passport-number" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cd-nationality">Nationality</label>
-                        <input type="text" id="cd-nationality" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cd-dob">Date of Birth (D/M/Y)</label>
-                        <input type="text" id="cd-dob" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cd-occupation">Occupation</label>
-                        <input type="text" id="cd-occupation" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cd-flight-number">Flight No./Vessel</label>
-                        <input type="text" id="cd-flight-number" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cd-from">From</label>
-                        <input type="text" id="cd-from" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="cd-date-arrival">Date of arrival</label>
-                        <input type="date" id="cd-date-arrival" required>
-                    </div>
 
-                    <div class="form-group">
-                        <label>1. Do you have dutiable, prohibited, restricted goods to declare?</label>
-                        <div class="channel-selection">
-                            <button type="button" class="btn red-channel">Red Channel (Goods to Declare)</button>
-                            <button type="button" class="btn green-channel">Green Channel (Nothing to Declare)</button>
-                        </div>
-                        <p class="channel-info">If you are in doubt, please proceed through the Red channel.</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label>2. Are you bringing foreign currency over US$ 10000 or equivalent?</label>
-                        <select id="cd-currency" required>
-                            <option value="no">No</option>
-                            <option value="yes">Yes</option>
-                        </select>
-                        <input type="text" id="cd-currency-amount" placeholder="Amount" style="display: none; margin-top: 10px;">
-                        <p class="info-text">If yes, declare to Customs and take back FED (Foreign Exchange Declaration) form.</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label>3. Do you have any valuable articles including gold, jewellery etc. for temporary admission?</label>
-                        <select id="cd-valuables" required>
-                            <option value="no">No</option>
-                            <option value="yes">Yes</option>
-                        </select>
-                        <p class="info-text">If yes, please declare on the reverse side.</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="cd-signature">Signature</label>
-                        <input type="text" id="cd-signature" required>
-                        <p class="info-text">I have read the NOTICE and certify that this declaration is true and correct.</p>
-                    </div>
-
-                    <button type="submit" class="btn">Submit Declaration</button>
-                </form>
-            </div>
-        `,
         rewards: `
             <div class="feature-card">
                 <h2><span class="material-symbols-outlined">military_tech</span> Reward Points</h2>
@@ -673,33 +621,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="feature-card">
                 <h2><span class="material-symbols-outlined">more_horiz</span> More</h2>
                 <div class="home-grid">
-                    <div class="home-item" data-feature="arrival_card">
-                        <span class="material-symbols-outlined">flight_land</span>
-                        <span>Arrival Card</span>
-                    </div>
                     <div class="home-item" data-feature="lounge">
                         <span class="material-symbols-outlined">deck</span>
                         <span>Lounge</span>
-                    </div>
-                    <div class="home-item" data-feature="ev_charging">
-                        <span class="material-symbols-outlined">ev_station</span>
-                        <span>EV Charging</span>
-                    </div>
-                    <div class="home-item" data-feature="carbon_offset">
-                        <span class="material-symbols-outlined">public</span>
-                        <span>Carbon Offset</span>
-                    </div>
-                    <div class="home-item" data-feature="map">
-                        <span class="material-symbols-outlined">map</span>
-                        <span>Airport Map</span>
-                    </div>
-                    <div class="home-item" data-feature="rewards">
-                        <span class="material-symbols-outlined">military_tech</span>
-                        <span>Rewards</span>
-                    </div>
-                    <div class="home-item" data-feature="custom_declaration">
-                        <span class="material-symbols-outlined">description</span>
-                        <span>Customs</span>
                     </div>
                     <div class="home-item" data-feature="profile">
                         <span class="material-symbols-outlined">person</span>
@@ -711,33 +635,110 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
             </div>
+        `,
+        settings: `
+            <div class="feature-card">
+                <h2><span class="material-symbols-outlined">settings</span> Settings</h2>
+                <div class="settings-section">
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="material-symbols-outlined">language</span>
+                            <div class="setting-details">
+                                <h3 data-translate="language">Language</h3>
+                                <p data-translate="selectLanguage">Select your preferred language</p>
+                            </div>
+                        </div>
+                        <div class="setting-value">
+                            <span id="current-language">English</span>
+                        </div>
+                    </div>
+                    
+                    <div class="language-selector">
+                        <div class="language-options">
+                            <button class="language-option" data-lang="en">
+                                <span class="flag">🇺🇸</span>
+                                <span class="lang-name">English</span>
+                            </button>
+                            <button class="language-option" data-lang="zh">
+                                <span class="flag">🇨🇳</span>
+                                <span class="lang-name">中文 (Chinese)</span>
+                            </button>
+                            <button class="language-option" data-lang="ja">
+                                <span class="flag">🇯🇵</span>
+                                <span class="lang-name">日本語 (Japanese)</span>
+                            </button>
+                            <button class="language-option" data-lang="ko">
+                                <span class="flag">🇰🇷</span>
+                                <span class="lang-name">한국어 (Korean)</span>
+                            </button>
+                            <button class="language-option" data-lang="th">
+                                <span class="flag">🇹🇭</span>
+                                <span class="lang-name">ไทย (Thai)</span>
+                            </button>
+                            <button class="language-option" data-lang="my">
+                                <span class="flag">🇲🇲</span>
+                                <span class="lang-name">မြန်မာ (Myanmar)</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         `
     };
 
     function loadFeature(featureName) {
-        mainContent.innerHTML = features[featureName];
+        if (featureName === 'shops') {
+            loadShops();
+        } else {
+            mainContent.innerHTML = features[featureName];
+        }
         
-        if (featureName === 'home' || featureName === 'more') {
-            backBtn.style.display = 'none';
+        if (featureName === 'home') {
+            if (backBtn.style.display !== 'none') {
+                backBtn.classList.add('hide');
+                setTimeout(() => {
+                    backBtn.style.display = 'none';
+                    backBtn.classList.remove('hide');
+                }, 300);
+            }
             headerText.style.textAlign = 'center';
         } else {
-            backBtn.style.display = 'block';
+            if (backBtn.style.display === 'none') {
+                backBtn.style.display = 'flex';
+                backBtn.classList.add('show');
+                setTimeout(() => {
+                    backBtn.classList.remove('show');
+                }, 400);
+            }
             headerText.style.textAlign = 'left';
         }
 
         // Add event listeners
         const arrivalForm = document.getElementById('arrival-card-form');
-        if(arrivalForm) arrivalForm.addEventListener('submit', (e) => { e.preventDefault(); alert('Arrival card submitted!'); });
+        if(arrivalForm) {
+            arrivalForm.addEventListener('submit', (e) => { 
+                e.preventDefault(); 
+                saveArrivalCardData();
+                showAlert('Arrival card submitted!', 'Submission Successful', 'success'); 
+            });
+        }
+
+        // Autofill and Clear buttons
+        const autofillBtn = document.getElementById('autofill-btn');
+        if(autofillBtn) autofillBtn.addEventListener('click', autofillArrivalCard);
+
+        const clearFormBtn = document.getElementById('clear-form-btn');
+        if(clearFormBtn) clearFormBtn.addEventListener('click', clearArrivalCard);
 
         const evPaymentForm = document.getElementById('ev-payment-form');
-        if(evPaymentForm) evPaymentForm.addEventListener('submit', (e) => { e.preventDefault(); alert('Payment successful! Charging started.'); });
+        if(evPaymentForm) evPaymentForm.addEventListener('submit', (e) => { e.preventDefault(); showAlert('Payment successful! Charging started.', 'Payment Confirmed', 'success'); });
 
         const carbonForm = document.getElementById('carbon-offset-form');
-        if(carbonForm) carbonForm.addEventListener('submit', (e) => { e.preventDefault(); alert('Thank you for your contribution!'); });
+        if(carbonForm) carbonForm.addEventListener('submit', (e) => { e.preventDefault(); showAlert('Thank you for your contribution!', 'Carbon Offset', 'success'); });
 
         const customDeclarationForm = document.getElementById('custom-declaration-form');
         if(customDeclarationForm) {
-            customDeclarationForm.addEventListener('submit', (e) => { e.preventDefault(); alert('Customs Declaration Submitted!'); });
+            customDeclarationForm.addEventListener('submit', (e) => { e.preventDefault(); showAlert('Customs Declaration Submitted!', 'Declaration Submitted', 'success'); });
 
             const currencySelect = document.getElementById('cd-currency');
             const currencyAmount = document.getElementById('cd-currency-amount');
@@ -753,11 +754,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const greenChannelBtn = document.querySelector('.green-channel');
 
             redChannelBtn.addEventListener('click', () => {
-                alert('Please proceed to the Red Channel for inspection.');
+                showAlert('Please proceed to the Red Channel for inspection.', 'Customs Information', 'info');
             });
 
             greenChannelBtn.addEventListener('click', () => {
-                alert('You may proceed through the Green Channel.');
+                showAlert('You may proceed through the Green Channel.', 'Customs Information', 'success');
             });
         }
 
@@ -771,9 +772,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectedPayment = document.querySelector('.payment-method.active');
             if (amount && selectedPayment) {
                 const method = selectedPayment.dataset.method;
-                alert(`Proceeding to pay ${amount} MMK with ${method}`);
+                showAlert(`Proceeding to pay ${amount} MMK with ${method}`, 'Payment Processing', 'info');
             } else {
-                alert('Please enter an amount and select a payment method.');
+                showAlert('Please enter an amount and select a payment method.', 'Missing Information', 'warning');
             }
         });
 
@@ -786,7 +787,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const payBtn = document.getElementById('pay-btn');
-        if(payBtn) payBtn.addEventListener('click', () => alert('Pay function coming soon!'));
+        if(payBtn) payBtn.addEventListener('click', () => showAlert('Pay function coming soon!', 'Payment', 'info'));
 
         const mmqrPayBtn = document.getElementById('mmqr-pay-btn');
         if(mmqrPayBtn) mmqrPayBtn.addEventListener('click', () => {
@@ -795,7 +796,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const generateQrBtn = document.querySelector('#mmqr-payment .btn');
-        if(generateQrBtn) generateQrBtn.addEventListener('click', () => alert('MMQR payment initiated!'));
+        if(generateQrBtn) generateQrBtn.addEventListener('click', () => showAlert('MMQR payment initiated!', 'Payment Success', 'success'));
 
         const flightStatusForm = document.getElementById('flight-status-form');
         if(flightStatusForm) {
@@ -808,17 +809,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        const quickActionItems = document.querySelectorAll('.quick-action-item');
-        quickActionItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const feature = item.getAttribute('data-feature');
-                loadFeature(feature);
-                updateNav(feature);
-            });
-        });
-
-        const homeItems = document.querySelectorAll('.home-item');
-        homeItems.forEach(item => {
+        const serviceItems = document.querySelectorAll('.service-item');
+        serviceItems.forEach(item => {
             item.addEventListener('click', () => {
                 const feature = item.getAttribute('data-feature');
                 loadFeature(feature);
@@ -831,12 +823,39 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', () => {
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                alert(`Filtering by: ${btn.dataset.filter}`);
+                showAlert(`Filtering by: ${btn.dataset.filter}`, 'Filter Applied', 'info');
             });
         });
 
         const loungeBookingForm = document.getElementById('lounge-booking-form');
-        if(loungeBookingForm) loungeBookingForm.addEventListener('submit', (e) => { e.preventDefault(); alert('Lounge booked successfully!'); });
+        if(loungeBookingForm) loungeBookingForm.addEventListener('submit', (e) => { e.preventDefault(); showAlert('Lounge booked successfully!', 'Booking Confirmed', 'success'); });
+
+        const promotionBtn = document.querySelector('.promotion-btn');
+        if(promotionBtn) promotionBtn.addEventListener('click', () => {
+            showAlert('Redirecting to promotion details...', 'Promotion', 'info');
+        });
+
+        // Shops functionality
+        initShopsFeatures();
+
+        // Carousel functionality
+        initCarousel();
+        
+        // Language switcher functionality
+        const languageOptions = document.querySelectorAll('.language-option');
+        languageOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const lang = option.getAttribute('data-lang');
+                changeLanguage(lang);
+                
+                // Update active state
+                languageOptions.forEach(opt => opt.classList.remove('active'));
+                option.classList.add('active');
+                
+                // Show success message
+                showAlert(`${languageNames[lang]} language has been selected!`, 'Language Changed', 'success');
+            });
+        });
     }
 
     function showFlightStatus(flightNumber) {
@@ -965,7 +984,737 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Modal and Cart Logic
+    const productModal = document.getElementById('product-modal');
+    const closeModalBtn = document.getElementById('close-modal');
+    const modalShopName = document.getElementById('modal-shop-name');
+    const modalProductList = document.getElementById('modal-product-list');
+    const cartIcon = document.getElementById('cart-icon');
+    const cartCount = document.getElementById('cart-count');
+
+    let cart = [];
+    let products = [];
+
+    async function openModal(shopName) {
+        modalShopName.textContent = shopName;
+        modalProductList.innerHTML = '<div class="loading-spinner"><div class="spinner"></div></div>';
+        productModal.style.display = 'block';
+
+        if (products.length === 0) {
+            try {
+                const response = await fetch('https://dummyjson.com/products');
+                const data = await response.json();
+                products = data.products;
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                modalProductList.innerHTML = '<p>Could not load products. Please try again later.</p>';
+                return;
+            }
+        }
+
+        modalProductList.innerHTML = ''; // Clear loading spinner
+
+        // Display a selection of products (e.g., first 6)
+        const productsToShow = products.slice(0, 6);
+
+        productsToShow.forEach(product => {
+            const productCard = `
+                <div class="product-card">
+                    <img src="${product.thumbnail}" alt="${product.title}">
+                    <div class="product-info">
+                        <h4>${product.title}</h4>
+                        <p>K ${product.price.toLocaleString()}</p>
+                        <button class="add-to-cart-btn" data-product-name="${product.title}" data-product-price="${product.price}">Add to Cart</button>
+                    </div>
+                </div>
+            `;
+            modalProductList.innerHTML += productCard;
+        });
+    }
+
+    function updateCart() {
+        cartCount.textContent = cart.length;
+    }
+
+    mainContent.addEventListener('click', (e) => {
+        if (e.target.classList.contains('view-products-btn')) {
+            const shopName = e.target.dataset.shop;
+            openModal(shopName);
+        }
+    });
+
+    modalProductList.addEventListener('click', (e) => {
+        if (e.target.classList.contains('add-to-cart-btn')) {
+            const productName = e.target.dataset.productName;
+            const productPrice = e.target.dataset.productPrice;
+            cart.push({ name: productName, price: productPrice });
+            updateCart();
+            showAlert(`${productName} added to cart!`, 'Cart Updated', 'success');
+        }
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+        productModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+        if (e.target == productModal) {
+            productModal.style.display = 'none';
+        }
+    });
+
+    cartIcon.addEventListener('click', () => {
+        if (cart.length === 0) {
+            showAlert('Your cart is empty.', 'Empty Cart', 'info');
+            return;
+        }
+
+        let cartSummary = 'Items in your cart:\n\n';
+        cart.forEach(item => {
+            cartSummary += `${item.name} - ${item.price}\n`;
+        });
+
+        showAlert(cartSummary, 'Shopping Cart', 'info');
+    });
+
+    // Shops functionality
+    function initShopsFeatures() {
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const shopCards = document.querySelectorAll('.shop-card');
+        const searchInput = document.getElementById('shops-search');
+        const searchBtn = document.querySelector('.search-btn');
+        const aiHelpBtn = document.querySelector('.ai-help-btn');
+
+        // Filter functionality
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const filter = tab.dataset.filter;
+                
+                // Filter shop cards
+                shopCards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.style.display = 'block';
+                        card.style.animation = 'slideUp 0.5s ease-in-out';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Search functionality
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                
+                shopCards.forEach(card => {
+                    const shopName = card.querySelector('.shop-name').textContent.toLowerCase();
+                    const shopCategory = card.querySelector('.shop-category').textContent.toLowerCase();
+                    
+                    if (shopName.includes(searchTerm) || shopCategory.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        if (searchBtn) {
+            searchBtn.addEventListener('click', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                shopCards.forEach(card => {
+                    const shopName = card.querySelector('.shop-name').textContent.toLowerCase();
+                    const shopCategory = card.querySelector('.shop-category').textContent.toLowerCase();
+                    
+                    if (shopName.includes(searchTerm) || shopCategory.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        card.style.animation = 'slideUp 0.5s ease-in-out';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // AI Help button
+        if (aiHelpBtn) {
+            aiHelpBtn.addEventListener('click', () => {
+                // Trigger AI assistant
+                const aiAssistantBtn = document.getElementById('ai-assistant-btn');
+                if (aiAssistantBtn) {
+                    aiAssistantBtn.click();
+                }
+            });
+        }
+
+        // Quick view buttons
+        const quickViewBtns = document.querySelectorAll('.quick-view-btn');
+        quickViewBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const shopName = btn.dataset.shop;
+                showAlert(`Quick view for ${shopName} - Feature coming soon!`, 'Quick View', 'info');
+            });
+        });
+    }
+
+    // Carousel functionality
+    function initCarousel() {
+        const track = document.querySelector('.carousel-track');
+        const indicators = document.querySelectorAll('.indicator');
+        
+        if (!track || !indicators.length) return;
+        
+        let currentSlide = 0;
+        const totalSlides = indicators.length;
+        
+        function updateCarousel() {
+            const translateX = -currentSlide * 33.333;
+            track.style.transform = `translateX(${translateX}%)`;
+            
+            indicators.forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+        
+        // Event listeners for indicators
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentSlide = index;
+                updateCarousel();
+            });
+        });
+        
+        // Enhanced Touch/swipe support
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+        let startTime = 0;
+        
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            currentX = startX;
+            isDragging = true;
+            startTime = Date.now();
+            track.style.transition = 'none';
+        });
+        
+        track.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            
+            currentX = e.touches[0].clientX;
+            const diffX = currentX - startX;
+            const baseTranslate = -currentSlide * 33.333;
+            const currentTranslate = baseTranslate + (diffX / track.offsetWidth) * 100;
+            
+            // Limit the translation to prevent over-scrolling
+            const minTranslate = -((totalSlides - 1) * 33.333);
+            const maxTranslate = 0;
+            const limitedTranslate = Math.max(minTranslate, Math.min(maxTranslate, currentTranslate));
+            
+            track.style.transform = `translateX(${limitedTranslate}%)`;
+        });
+        
+        track.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            const endX = e.changedTouches[0].clientX;
+            const diffX = endX - startX;
+            const diffTime = Date.now() - startTime;
+            const velocity = Math.abs(diffX) / diffTime;
+            
+            // Re-enable transitions
+            track.style.transition = 'transform 0.5s ease-in-out';
+            
+            // Determine if we should change slides based on distance and velocity
+            const minSwipeDistance = 30;
+            const minVelocity = 0.3;
+            
+            if (Math.abs(diffX) > minSwipeDistance || velocity > minVelocity) {
+                if (diffX > 0) {
+                    // Swipe right - go to previous slide
+                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                } else {
+                    // Swipe left - go to next slide
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                }
+            }
+            
+            updateCarousel();
+        });
+        
+        // Mouse drag support for desktop testing
+        track.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            startX = e.clientX;
+            currentX = startX;
+            isDragging = true;
+            startTime = Date.now();
+            track.style.transition = 'none';
+            track.style.cursor = 'grabbing';
+        });
+        
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            
+            currentX = e.clientX;
+            const diffX = currentX - startX;
+            const baseTranslate = -currentSlide * 33.333;
+            const currentTranslate = baseTranslate + (diffX / track.offsetWidth) * 100;
+            
+            const minTranslate = -((totalSlides - 1) * 33.333);
+            const maxTranslate = 0;
+            const limitedTranslate = Math.max(minTranslate, Math.min(maxTranslate, currentTranslate));
+            
+            track.style.transform = `translateX(${limitedTranslate}%)`;
+        });
+        
+        document.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            const endX = e.clientX;
+            const diffX = endX - startX;
+            const diffTime = Date.now() - startTime;
+            const velocity = Math.abs(diffX) / diffTime;
+            
+            track.style.transition = 'transform 0.5s ease-in-out';
+            track.style.cursor = 'grab';
+            
+            const minSwipeDistance = 30;
+            const minVelocity = 0.3;
+            
+            if (Math.abs(diffX) > minSwipeDistance || velocity > minVelocity) {
+                if (diffX > 0) {
+                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                } else {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                }
+            }
+            
+            updateCarousel();
+        });
+    }
+
+    // Arrival Card Autofill Data Storage - Multiple realistic profiles
+    const arrivalCardProfiles = {
+        profile1: {
+            applicantType: 'me',
+            familyName: 'Smith',
+            firstName: 'John',
+            middleName: 'Michael',
+            dob: '1990-05-15',
+            sex: 'male',
+            nationality: 'American',
+            occupation: 'Software Engineer',
+            passport: 'A12345678',
+            passportIssuePlace: 'New York',
+            passportIssueDate: '2020-01-15',
+            expiryDate: '2030-01-15',
+            visaNumber: 'V987654321',
+            visaIssuePlace: 'Yangon',
+            visaIssueDate: '2024-01-01',
+            fromOrigin: 'New York, USA',
+            flightNumber: 'AA123',
+            firstTrip: 'no',
+            groupTour: 'no',
+            lengthOfStay: '7',
+            visitPurpose: 'tourist',
+            countryResidence: 'United States',
+            address: 'Hotel Yangon, Downtown',
+            idCardNumber: 'ID123456789',
+            fatherName: 'Robert Smith',
+            prohibitedGoods: 'no',
+            currencyDeclaration: 'no',
+            goodsValue: '',
+            signatureName: 'John Michael Smith'
+        },
+        profile2: {
+            applicantType: 'other',
+            familyName: 'Johnson',
+            firstName: 'Sarah',
+            middleName: 'Elizabeth',
+            dob: '1985-12-03',
+            sex: 'female',
+            nationality: 'British',
+            occupation: 'Marketing Manager',
+            passport: 'GB987654321',
+            passportIssuePlace: 'London',
+            passportIssueDate: '2019-06-20',
+            expiryDate: '2029-06-20',
+            visaNumber: 'V123456789',
+            visaIssuePlace: 'Yangon',
+            visaIssueDate: '2024-02-15',
+            fromOrigin: 'London, UK',
+            flightNumber: 'BA456',
+            firstTrip: 'yes',
+            groupTour: 'no',
+            lengthOfStay: '14',
+            visitPurpose: 'business',
+            countryResidence: 'United Kingdom',
+            address: 'Sule Shangri-La Hotel, Yangon',
+            idCardNumber: 'GB123456789',
+            fatherName: 'David Johnson',
+            prohibitedGoods: 'no',
+            currencyDeclaration: 'yes',
+            goodsValue: '15000',
+            signatureName: 'Sarah Elizabeth Johnson'
+        },
+        profile3: {
+            applicantType: 'me',
+            familyName: 'Chen',
+            firstName: 'Wei',
+            middleName: 'Ming',
+            dob: '1992-08-22',
+            sex: 'male',
+            nationality: 'Chinese',
+            occupation: 'Business Analyst',
+            passport: 'CN456789123',
+            passportIssuePlace: 'Beijing',
+            passportIssueDate: '2021-03-10',
+            expiryDate: '2031-03-10',
+            visaNumber: 'V456789123',
+            visaIssuePlace: 'Yangon',
+            visaIssueDate: '2024-03-01',
+            fromOrigin: 'Beijing, China',
+            flightNumber: 'CA789',
+            firstTrip: 'no',
+            groupTour: 'yes',
+            lengthOfStay: '5',
+            visitPurpose: 'meeting',
+            countryResidence: 'China',
+            address: 'Kandawgyi Palace Hotel, Yangon',
+            idCardNumber: 'CN987654321',
+            fatherName: 'Li Chen',
+            prohibitedGoods: 'no',
+            currencyDeclaration: 'no',
+            goodsValue: '',
+            signatureName: 'Wei Ming Chen'
+        },
+        profile4: {
+            applicantType: 'other',
+            familyName: 'Tanaka',
+            firstName: 'Yuki',
+            middleName: 'Hiroshi',
+            dob: '1988-11-17',
+            sex: 'male',
+            nationality: 'Japanese',
+            occupation: 'Tour Guide',
+            passport: 'JP789123456',
+            passportIssuePlace: 'Tokyo',
+            passportIssueDate: '2022-09-05',
+            expiryDate: '2032-09-05',
+            visaNumber: 'V789123456',
+            visaIssuePlace: 'Yangon',
+            visaIssueDate: '2024-04-10',
+            fromOrigin: 'Tokyo, Japan',
+            flightNumber: 'JL012',
+            firstTrip: 'yes',
+            groupTour: 'yes',
+            lengthOfStay: '10',
+            visitPurpose: 'education',
+            countryResidence: 'Japan',
+            address: 'The Strand Hotel, Yangon',
+            idCardNumber: 'JP456789123',
+            fatherName: 'Takeshi Tanaka',
+            prohibitedGoods: 'no',
+            currencyDeclaration: 'no',
+            goodsValue: '',
+            signatureName: 'Yuki Hiroshi Tanaka'
+        },
+        profile5: {
+            applicantType: 'me',
+            familyName: 'Kumar',
+            firstName: 'Priya',
+            middleName: 'Sharma',
+            dob: '1995-04-08',
+            sex: 'female',
+            nationality: 'Indian',
+            occupation: 'Doctor',
+            passport: 'IN321654987',
+            passportIssuePlace: 'Mumbai',
+            passportIssueDate: '2023-01-20',
+            expiryDate: '2033-01-20',
+            visaNumber: 'V321654987',
+            visaIssuePlace: 'Yangon',
+            visaIssueDate: '2024-05-15',
+            fromOrigin: 'Mumbai, India',
+            flightNumber: 'AI345',
+            firstTrip: 'no',
+            groupTour: 'no',
+            lengthOfStay: '21',
+            visitPurpose: 'transit',
+            countryResidence: 'India',
+            address: 'Sedona Hotel, Yangon',
+            idCardNumber: 'IN987654321',
+            fatherName: 'Rajesh Kumar',
+            prohibitedGoods: 'no',
+            currencyDeclaration: 'yes',
+            goodsValue: '8000',
+            signatureName: 'Priya Sharma Kumar'
+        }
+    };
+
+    // Current profile index for cycling through different profiles
+    let currentProfileIndex = 0;
+    const profileKeys = Object.keys(arrivalCardProfiles);
+
+    // Autofill function for arrival card
+    function autofillArrivalCard() {
+        const form = document.getElementById('arrival-card-form');
+        if (!form) return;
+
+        // Get current profile data
+        const currentProfileKey = profileKeys[currentProfileIndex];
+        const profileData = arrivalCardProfiles[currentProfileKey];
+        
+        // Get all form elements
+        const formElements = form.querySelectorAll('input, select, textarea');
+        let filledCount = 0;
+        
+        // Fill all form fields with current profile data
+        formElements.forEach(element => {
+            const elementId = element.id;
+            
+            // Skip submit button
+            if (element.type === 'submit') return;
+            
+            // Fill with profile data if available
+            if (profileData[elementId] !== undefined) {
+                element.value = profileData[elementId];
+                filledCount++;
+            }
+            // For elements not in profile data, fill with sensible defaults
+            else if (element.type === 'text' || element.type === 'number') {
+                if (elementId === 'middle-name') {
+                    element.value = ''; // Leave middle name empty if not provided
+                } else if (elementId === 'visa-number') {
+                    element.value = ''; // Leave visa number empty if not provided
+                } else if (elementId === 'visa-issue-place') {
+                    element.value = ''; // Leave visa issue place empty if not provided
+                } else if (elementId === 'visa-issue-date') {
+                    element.value = ''; // Leave visa issue date empty if not provided
+                } else if (elementId === 'id-card-number') {
+                    element.value = ''; // Leave ID card number empty if not provided
+                } else if (elementId === 'father-name') {
+                    element.value = ''; // Leave father's name empty if not provided
+                } else if (elementId === 'goods-value') {
+                    element.value = ''; // Leave goods value empty if not provided
+                }
+            }
+        });
+
+        // Move to next profile for next autofill
+        currentProfileIndex = (currentProfileIndex + 1) % profileKeys.length;
+
+        // Show detailed success message with profile info
+        const profileName = `${profileData.firstName} ${profileData.familyName}`;
+        const profileNationality = profileData.nationality;
+        const profileType = profileData.applicantType === 'me' ? 'Self' : 'Other Person';
+        
+        showAlert(
+            `Form filled with ${profileType} profile: ${profileName} (${profileNationality})\n\nAll required fields have been completed.`, 
+            'Autofill Complete', 
+            'success'
+        );
+    }
+
+    // Clear form function
+    function clearArrivalCard() {
+        const form = document.getElementById('arrival-card-form');
+        if (!form) return;
+
+        form.reset();
+        showAlert('Form has been cleared!', 'Form Cleared', 'info');
+    }
+
+
+    // Save form data function
+    function saveArrivalCardData() {
+        const form = document.getElementById('arrival-card-form');
+        if (!form) return;
+
+        const formData = new FormData(form);
+        const data = {};
+        
+        for (let [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+
+        // Save to localStorage
+        localStorage.setItem('arrivalCardData', JSON.stringify(data));
+        
+        // Show detailed save message
+        const applicantType = data.applicantType === 'me' ? 'Self' : 'Other Person';
+        const travelerName = `${data.firstName} ${data.familyName}`;
+        
+        showAlert(
+            `Form data saved for ${applicantType}: ${travelerName}\n\nThis data will be available for future autofill.`, 
+            'Data Saved', 
+            'success'
+        );
+    }
+
+    // Custom Alert Modal Function
+    function showAlert(message, title = 'Alert', type = 'info', showCancel = false) {
+        const alertModal = document.getElementById('alert-modal');
+        const alertTitle = document.getElementById('alert-title');
+        const alertMessage = document.getElementById('alert-message');
+        const alertIcon = document.getElementById('alert-icon');
+        const alertConfirm = document.getElementById('alert-confirm');
+        const alertCancel = document.getElementById('alert-cancel');
+        
+        // Set content
+        alertTitle.textContent = title;
+        alertMessage.textContent = message;
+        
+        // Set icon based on type
+        const icons = {
+            'info': 'info',
+            'success': 'check_circle',
+            'warning': 'warning',
+            'error': 'error'
+        };
+        alertIcon.textContent = icons[type] || 'info';
+        
+        // Show/hide cancel button
+        alertCancel.style.display = showCancel ? 'block' : 'none';
+        
+        // Show modal
+        alertModal.style.display = 'block';
+        
+        // Return promise for confirmation
+        return new Promise((resolve) => {
+            alertConfirm.onclick = () => {
+                alertModal.style.display = 'none';
+                resolve(true);
+            };
+            
+            alertCancel.onclick = () => {
+                alertModal.style.display = 'none';
+                resolve(false);
+            };
+            
+            // Close on backdrop click
+            alertModal.onclick = (e) => {
+                if (e.target === alertModal) {
+                    alertModal.style.display = 'none';
+                    resolve(false);
+                }
+            };
+        });
+    }
+
     // Initial load
     loadFeature('home');
     loadAnnouncements();
+    updateUI(); // Update UI with current language
+
+    function loadShops() {
+        let shopsHTML = `
+            <div class="shops-container">
+                <div class="shops-header">
+                    <h2><span class="material-symbols-outlined">storefront</span> <span data-translate="airportShops">Airport Shops & Dining</span></h2>
+                    <p class="shops-subtitle" data-translate="discoverBrands">Discover premium brands and local favorites</p>
+                </div>
+                
+                <div class="shops-search-section">
+                    <div class="search-container">
+                        <span class="material-symbols-outlined search-icon">search</span>
+                        <input type="text" id="shops-search" placeholder="Search shops, brands, or products..." data-translate-placeholder="searchShops">
+                        <button class="search-btn">
+                            <span class="material-symbols-outlined">search</span>
+                        </button>
+                    </div>
+                    
+                            <div class="filter-tabs">
+                                <button class="filter-tab active" data-filter="all" data-translate="all">All</button>
+                                <button class="filter-tab" data-filter="luxury" data-translate="luxury">Luxury</button>
+                                <button class="filter-tab" data-filter="fashion" data-translate="fashion">Fashion</button>
+                                <button class="filter-tab" data-filter="dining" data-translate="dining">Dining</button>
+                                <button class="filter-tab" data-filter="local" data-translate="local">Local</button>
+                            </div>
+                </div>
+                
+                <div class="shops-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">${shops.length}</span>
+                        <span class="stat-label" data-translate="shopsAvailable">Shops Available</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label" data-translate="operatingHours">Operating Hours</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">Free</span>
+                        <span class="stat-label" data-translate="wifiAccess">WiFi Access</span>
+                    </div>
+                </div>
+                
+                <div class="shops-grid">
+        `;
+
+        shops.forEach((shop, index) => {
+            // Determine category based on shop name
+            let category = 'all';
+            if (['Coach', 'Fossil', 'Furla', 'Versace', 'Longines', 'Tumi', 'Samsonite'].includes(shop.name)) {
+                category = 'luxury';
+            } else if (['Cavalli Class', 'Ermen', 'Galleria', 'Kate', 'Kipling', 'Mandarinaa', 'Mont', 'Phwar', 'Shanghai', 'Swar', 'Ladychin'].includes(shop.name)) {
+                category = 'fashion';
+            } else if (['Cafe', 'Coffee Bean', 'Espace', 'Kfc', 'Mcs', 'Parison', 'Bon', 'Cafe Corner', 'Jdonuts', 'Krispy', 'Lotteria', 'Yakun', 'Yangoon'].includes(shop.name)) {
+                category = 'dining';
+            } else {
+                category = 'local';
+            }
+
+            shopsHTML += `
+                <div class="shop-card" data-category="${category}" data-index="${index}">
+                    <div class="shop-image-container">
+                        <img src="${shop.image_url}" alt="${shop.name}" loading="lazy">
+                        <div class="shop-overlay">
+                            <button class="quick-view-btn" data-shop="${shop.name}">
+                                <span class="material-symbols-outlined">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="shop-info">
+                        <div class="shop-content">
+                            <h3 class="shop-name">${shop.name}</h3>
+                            <div class="shop-category">${category.charAt(0).toUpperCase() + category.slice(1)}</div>
+                        </div>
+                        <div class="shop-actions">
+                            <button class="view-products-btn" data-shop="${shop.name}">
+                                <span class="material-symbols-outlined">shopping_bag</span>
+                                View Products
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        shopsHTML += `
+                </div>
+                
+                        <div class="shops-footer">
+                            <p class="footer-text" data-translate="cantFind">Can't find what you're looking for? Ask our AI assistant for help!</p>
+                            <button class="ai-help-btn" data-translate="getAIHelp">
+                                <span class="material-symbols-outlined">smart_toy</span>
+                                Get AI Help
+                            </button>
+                        </div>
+            </div>
+        `;
+
+        mainContent.innerHTML = shopsHTML;
+    }
 });
