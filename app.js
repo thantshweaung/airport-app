@@ -22,12 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="carousel-slide active">
                                 <div class="feature-card flight-status-card">
                                     <h2><span class="material-symbols-outlined">flight_takeoff</span> <span data-translate="checkFlightStatus">Check Flight Status</span></h2>
-                                    <form id="flight-status-form">
+                                    <form id="home-flight-status-form">
                                         <div class="form-group">
-                                            <input type="text" id="flight-number-search" placeholder="Enter Flight Number, e.g., 8M 231">
+                                            <input type="text" id="home-flight-number-search" placeholder="Enter Flight Number, e.g., 8M 231">
                                         </div>
                                         <button type="submit" class="btn">Search</button>
                                     </form>
+                                    <div id="home-flight-results" class="home-flight-results"></div>
                                 </div>
                             </div>
                             
@@ -89,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="service-item" data-feature="arrival_customs">
                         <span class="material-symbols-outlined">flight_land</span>
-                        <span>Arrival</span>
+                        <span class="service-title">Arrival/<br>Departure</span>
                         <small>Customs form</small>
                     </div>
                     <div class="service-item" data-feature="ev_charging">
@@ -123,17 +124,55 @@ document.addEventListener('DOMContentLoaded', () => {
         flights: `
             <div class="feature-card flight-status-card">
                 <h2><span class="material-symbols-outlined">flight_takeoff</span> Check Flight Status</h2>
-                <form id="flight-status-form">
-                    <div class="form-group">
-                        <input type="text" id="flight-number-search" placeholder="Enter Flight Number, e.g., 8M 231">
+                
+                <div class="flight-search-section">
+                    <div class="search-tabs">
+                        <button class="search-tab active" onclick="switchSearchTab('flight-number')">Flight Number</button>
+                        <button class="search-tab" onclick="switchSearchTab('route')">Route</button>
                     </div>
-                    <button type="submit" class="btn">Search</button>
-                </form>
+                    
+                    <div id="flight-number-search-form" class="search-form active">
+                        <form id="flight-status-form">
+                            <div class="form-group">
+                                <input type="text" id="flight-number-search" placeholder="Enter Flight Number, e.g., 8M 231, MH123">
+                            </div>
+                            <button type="submit" class="btn">
+                                <span class="material-symbols-outlined">search</span>
+                                Search Flight
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div id="route-search-form" class="search-form">
+                        <form id="route-search-form">
+                            <div class="form-group">
+                                <input type="text" id="departure-airport" placeholder="From (e.g., RGN, BKK, SIN)">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="arrival-airport" placeholder="To (e.g., KUL, CGK, MNL)">
+                            </div>
+                            <div class="form-group">
+                                <input type="date" id="flight-date" placeholder="Date">
+                            </div>
+                            <button type="submit" class="btn">
+                                <span class="material-symbols-outlined">search</span>
+                                Search Route
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div id="flight-results" class="flight-results"></div>
+                
+                <div class="recent-searches">
+                    <h3>Recent Searches</h3>
+                    <div id="recent-flight-searches" class="recent-list"></div>
+                </div>
             </div>
         `,
         arrival_customs: `
             <div class="feature-card">
-                <h2><span class="material-symbols-outlined">flight_land</span> Digital Arrival Card</h2>
+                <h2><span class="material-symbols-outlined">flight_land</span> Digital Arrival/Departure Card</h2>
                 <div class="form-controls">
                     <button type="button" class="btn btn-secondary" id="autofill-btn">
                         <span class="material-symbols-outlined">auto_fix_high</span>
@@ -868,7 +907,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 </div>
                             </div>
                             <div class="setting-action">
-                                <button class="btn btn-secondary" onclick="showAlert('Version 1.0.0\\n\\nLatest features:\\n- Multi-language support\\n- Airport map with shop locations\\n- Digital arrival card\\n- Charging services\\n- Member management', 'Version Update', 'info')">Check</button>
+                                <button class="btn btn-secondary" onclick="showAlert('Version 1.0.0\\n\\nLatest features:\\n- Multi-language support\\n- Airport map with shop locations\\n- Digital arrival/departure card\\n- Charging services\\n- Member management', 'Version Update', 'info')">Check</button>
                             </div>
                         </div>
                         
@@ -1133,7 +1172,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="search-results">
                     <div class="search-category">
                         <h3>Quick Actions</h3>
-                        <div class="search-item" onclick="loadFeature('arrival_customs')">Digital Arrival Card</div>
+                        <div class="search-item" onclick="loadFeature('arrival_customs')">Digital Arrival/Departure Card</div>
                         <div class="search-item" onclick="loadFeature('charging_stations')">Charging Stations</div>
                         <div class="search-item" onclick="loadFeature('shops')">Airport Shops</div>
                     </div>
@@ -1209,7 +1248,7 @@ document.addEventListener('DOMContentLoaded', () => {
             arrivalForm.addEventListener('submit', (e) => { 
                 e.preventDefault(); 
                 saveArrivalCardData();
-                showAlert('Arrival card submitted!', 'Submission Successful', 'success'); 
+                showAlert('Arrival/Departure card submitted!', 'Submission Successful', 'success'); 
             });
         }
 
@@ -1288,16 +1327,46 @@ document.addEventListener('DOMContentLoaded', () => {
         const generateQrBtn = document.querySelector('#mmqr-payment .btn');
         if(generateQrBtn) generateQrBtn.addEventListener('click', () => showAlert('MMQR payment initiated!', 'Payment Success', 'success'));
 
+        // Flight Status Search Functions
+        // Home page carousel flight status form
+        const homeFlightStatusForm = document.getElementById('home-flight-status-form');
+        if(homeFlightStatusForm) {
+            homeFlightStatusForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const flightNumber = document.getElementById('home-flight-number-search').value;
+                if (flightNumber) {
+                    searchFlightFromHome(flightNumber);
+                }
+            });
+        }
+
+        // Dedicated flights page forms
         const flightStatusForm = document.getElementById('flight-status-form');
         if(flightStatusForm) {
             flightStatusForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const flightNumber = document.getElementById('flight-number-search').value;
                 if (flightNumber) {
-                    showFlightStatus(flightNumber);
+                    searchFlightByNumber(flightNumber);
                 }
             });
         }
+
+        const routeSearchForm = document.getElementById('route-search-form');
+        if(routeSearchForm) {
+            routeSearchForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const departure = document.getElementById('departure-airport').value;
+                const arrival = document.getElementById('arrival-airport').value;
+                const date = document.getElementById('flight-date').value;
+                if (departure && arrival) {
+                    searchFlightByRoute(departure, arrival, date);
+                }
+            });
+        }
+
+        // Load recent searches on page load
+        loadRecentFlightSearches();
 
         const serviceItems = document.querySelectorAll('.service-item');
         serviceItems.forEach(item => {
@@ -1688,6 +1757,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let startTime = 0;
         
         track.addEventListener('touchstart', (e) => {
+            // Check if touch is on a form element
+            const target = e.target;
+            if (target.tagName === 'INPUT' || target.tagName === 'BUTTON' || target.closest('form')) {
+                return; // Don't interfere with form interactions
+            }
+            
             startX = e.touches[0].clientX;
             currentX = startX;
             isDragging = true;
@@ -1697,6 +1772,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         track.addEventListener('touchmove', (e) => {
             if (!isDragging) return;
+            
+            // Check if touch is on a form element
+            const target = e.target;
+            if (target.tagName === 'INPUT' || target.tagName === 'BUTTON' || target.closest('form')) {
+                return; // Don't interfere with form interactions
+            }
+            
             e.preventDefault();
             
             currentX = e.touches[0].clientX;
@@ -1743,6 +1825,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Mouse drag support for desktop testing
         track.addEventListener('mousedown', (e) => {
+            // Check if click is on a form element
+            const target = e.target;
+            if (target.tagName === 'INPUT' || target.tagName === 'BUTTON' || target.closest('form')) {
+                return; // Don't interfere with form interactions
+            }
+            
             e.preventDefault();
             startX = e.clientX;
             currentX = startX;
@@ -2231,6 +2319,415 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         
         showAlert(knowledgeContent[topic] || 'Knowledge content not available.', 'Knowledge Base', 'info');
+    }
+
+    // Flight Status Search Functions
+    function switchSearchTab(tabType) {
+        // Remove active class from all tabs and forms
+        document.querySelectorAll('.search-tab').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.search-form').forEach(form => form.classList.remove('active'));
+        
+        // Add active class to selected tab and form
+        if (tabType === 'flight-number') {
+            document.querySelector('.search-tab[onclick="switchSearchTab(\'flight-number\')"]').classList.add('active');
+            document.getElementById('flight-number-search-form').classList.add('active');
+        } else if (tabType === 'route') {
+            document.querySelector('.search-tab[onclick="switchSearchTab(\'route\')"]').classList.add('active');
+            document.getElementById('route-search-form').classList.add('active');
+        }
+    }
+
+    async function searchFlightFromHome(flightNumber) {
+        const resultsDiv = document.getElementById('home-flight-results');
+        if (!resultsDiv) return;
+
+        // Show loading state
+        resultsDiv.innerHTML = `
+            <div class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Searching for flight ${flightNumber}...</p>
+            </div>
+        `;
+
+        try {
+            // Simulate API call with realistic flight data
+            const flightData = await fetchFlightData(flightNumber);
+            displayHomeFlightResults(flightData);
+            saveRecentSearch('flight', flightNumber);
+        } catch (error) {
+            resultsDiv.innerHTML = `
+                <div class="error-state">
+                    <span class="material-symbols-outlined">error</span>
+                    <p>Unable to fetch flight information. Please try again.</p>
+                </div>
+            `;
+        }
+    }
+
+    async function searchFlightByNumber(flightNumber) {
+        const resultsDiv = document.getElementById('flight-results');
+        if (!resultsDiv) return;
+
+        // Show loading state
+        resultsDiv.innerHTML = `
+            <div class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Searching for flight ${flightNumber}...</p>
+            </div>
+        `;
+
+        try {
+            // Simulate API call with realistic flight data
+            const flightData = await fetchFlightData(flightNumber);
+            displayFlightResults(flightData);
+            saveRecentSearch('flight', flightNumber);
+        } catch (error) {
+            resultsDiv.innerHTML = `
+                <div class="error-state">
+                    <span class="material-symbols-outlined">error</span>
+                    <p>Unable to fetch flight information. Please try again.</p>
+                </div>
+            `;
+        }
+    }
+
+    async function searchFlightByRoute(departure, arrival, date) {
+        const resultsDiv = document.getElementById('flight-results');
+        if (!resultsDiv) return;
+
+        // Show loading state
+        resultsDiv.innerHTML = `
+            <div class="loading-state">
+                <div class="loading-spinner"></div>
+                <p>Searching flights from ${departure} to ${arrival}...</p>
+            </div>
+        `;
+
+        try {
+            // Simulate API call with realistic route data
+            const routeData = await fetchRouteData(departure, arrival, date);
+            displayRouteResults(routeData);
+            saveRecentSearch('route', `${departure} → ${arrival}`);
+        } catch (error) {
+            resultsDiv.innerHTML = `
+                <div class="error-state">
+                    <span class="material-symbols-outlined">error</span>
+                    <p>Unable to fetch flight information. Please try again.</p>
+                </div>
+            `;
+        }
+    }
+
+    // Simulate API calls with realistic data
+    async function fetchFlightData(flightNumber) {
+        // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // Mock flight data based on common airlines
+        const mockFlights = {
+            '8M231': {
+                flightNumber: '8M 231',
+                airline: 'Myanmar National Airlines',
+                aircraft: 'ATR 72-600',
+                departure: { airport: 'RGN', city: 'Yangon', time: '08:30', terminal: 'T1' },
+                arrival: { airport: 'MDL', city: 'Mandalay', time: '09:45', terminal: 'T1' },
+                status: 'On Time',
+                statusColor: '#4CAF50',
+                gate: 'A12',
+                baggage: 'B3',
+                duration: '1h 15m',
+                distance: '620 km'
+            },
+            'MH123': {
+                flightNumber: 'MH 123',
+                airline: 'Malaysia Airlines',
+                aircraft: 'Boeing 737-800',
+                departure: { airport: 'KUL', city: 'Kuala Lumpur', time: '14:20', terminal: 'T2' },
+                arrival: { airport: 'RGN', city: 'Yangon', time: '16:35', terminal: 'T1' },
+                status: 'Delayed',
+                statusColor: '#FF9800',
+                gate: 'B8',
+                baggage: 'A2',
+                duration: '2h 15m',
+                distance: '1,200 km'
+            },
+            'QR456': {
+                flightNumber: 'QR 456',
+                airline: 'Qatar Airways',
+                aircraft: 'Airbus A350-900',
+                departure: { airport: 'DOH', city: 'Doha', time: '02:15', terminal: 'T1' },
+                arrival: { airport: 'RGN', city: 'Yangon', time: '12:30', terminal: 'T1' },
+                status: 'On Time',
+                statusColor: '#4CAF50',
+                gate: 'C15',
+                baggage: 'A1',
+                duration: '6h 15m',
+                distance: '4,200 km'
+            }
+        };
+
+        return mockFlights[flightNumber.replace(/\s+/g, '')] || {
+            flightNumber: flightNumber,
+            airline: 'Unknown Airline',
+            aircraft: 'Unknown Aircraft',
+            departure: { airport: 'N/A', city: 'Unknown', time: 'N/A', terminal: 'N/A' },
+            arrival: { airport: 'N/A', city: 'Unknown', time: 'N/A', terminal: 'N/A' },
+            status: 'No Data',
+            statusColor: '#9E9E9E',
+            gate: 'N/A',
+            baggage: 'N/A',
+            duration: 'N/A',
+            distance: 'N/A'
+        };
+    }
+
+    async function fetchRouteData(departure, arrival, date) {
+        // Simulate API delay
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
+        // Mock route data
+        const routes = [
+            {
+                flightNumber: '8M 201',
+                airline: 'Myanmar National Airlines',
+                aircraft: 'ATR 72-600',
+                departure: { airport: departure, time: '09:00', terminal: 'T1' },
+                arrival: { airport: arrival, time: '10:30', terminal: 'T1' },
+                status: 'On Time',
+                statusColor: '#4CAF50',
+                gate: 'A5',
+                duration: '1h 30m',
+                price: '$89'
+            },
+            {
+                flightNumber: 'MH 456',
+                airline: 'Malaysia Airlines',
+                aircraft: 'Boeing 737-800',
+                departure: { airport: departure, time: '15:45', terminal: 'T2' },
+                arrival: { airport: arrival, time: '17:20', terminal: 'T1' },
+                status: 'On Time',
+                statusColor: '#4CAF50',
+                gate: 'B12',
+                duration: '1h 35m',
+                price: '$125'
+            }
+        ];
+
+        return routes;
+    }
+
+    function displayHomeFlightResults(flight) {
+        const resultsDiv = document.getElementById('home-flight-results');
+        resultsDiv.innerHTML = `
+            <div class="home-flight-result">
+                <div class="home-flight-header">
+                    <div class="home-flight-info">
+                        <h3>${flight.flightNumber}</h3>
+                        <p>${flight.airline}</p>
+                    </div>
+                    <div class="home-flight-status" style="color: ${flight.statusColor}">
+                        ${flight.status}
+                    </div>
+                </div>
+                
+                <div class="home-flight-route">
+                    <div class="home-departure">
+                        <div class="time">${flight.departure.time}</div>
+                        <div class="airport">${flight.departure.airport}</div>
+                        <div class="city">${flight.departure.city}</div>
+                    </div>
+                    
+                    <div class="home-flight-path">
+                        <div class="duration">${flight.duration}</div>
+                        <div class="path-line">
+                            <span class="material-symbols-outlined">flight_takeoff</span>
+                            <div class="line"></div>
+                            <span class="material-symbols-outlined">flight_land</span>
+                        </div>
+                    </div>
+                    
+                    <div class="home-arrival">
+                        <div class="time">${flight.arrival.time}</div>
+                        <div class="airport">${flight.arrival.airport}</div>
+                        <div class="city">${flight.arrival.city}</div>
+                    </div>
+                </div>
+                
+                <div class="home-flight-details">
+                    <div class="detail-item">
+                        <span class="material-symbols-outlined">gate</span>
+                        <span>Gate ${flight.gate}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="material-symbols-outlined">luggage</span>
+                        <span>Baggage ${flight.baggage}</span>
+                    </div>
+                </div>
+                
+                <div class="home-flight-actions">
+                    <button class="btn btn-secondary" onclick="loadFeature('flights')">View Details</button>
+                </div>
+            </div>
+        `;
+    }
+
+    function displayFlightResults(flight) {
+        const resultsDiv = document.getElementById('flight-results');
+        resultsDiv.innerHTML = `
+            <div class="flight-result-card">
+                <div class="flight-header">
+                    <div class="flight-info">
+                        <h3>${flight.flightNumber}</h3>
+                        <p>${flight.airline}</p>
+                        <span class="aircraft">${flight.aircraft}</span>
+                    </div>
+                    <div class="flight-status" style="color: ${flight.statusColor}">
+                        <span class="material-symbols-outlined">${flight.status === 'On Time' ? 'schedule' : 'schedule'}</span>
+                        ${flight.status}
+                    </div>
+                </div>
+                
+                <div class="flight-route">
+                    <div class="departure">
+                        <div class="time">${flight.departure.time}</div>
+                        <div class="airport">${flight.departure.airport}</div>
+                        <div class="city">${flight.departure.city}</div>
+                        <div class="terminal">Terminal ${flight.departure.terminal}</div>
+                    </div>
+                    
+                    <div class="flight-path">
+                        <div class="duration">${flight.duration}</div>
+                        <div class="path-line">
+                            <span class="material-symbols-outlined">flight_takeoff</span>
+                            <div class="line"></div>
+                            <span class="material-symbols-outlined">flight_land</span>
+                        </div>
+                        <div class="distance">${flight.distance}</div>
+                    </div>
+                    
+                    <div class="arrival">
+                        <div class="time">${flight.arrival.time}</div>
+                        <div class="airport">${flight.arrival.airport}</div>
+                        <div class="city">${flight.arrival.city}</div>
+                        <div class="terminal">Terminal ${flight.arrival.terminal}</div>
+                    </div>
+                </div>
+                
+                <div class="flight-details">
+                    <div class="detail-item">
+                        <span class="material-symbols-outlined">gate</span>
+                        <span>Gate ${flight.gate}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="material-symbols-outlined">luggage</span>
+                        <span>Baggage ${flight.baggage}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function displayRouteResults(flights) {
+        const resultsDiv = document.getElementById('flight-results');
+        resultsDiv.innerHTML = `
+            <div class="route-results">
+                <h3>Available Flights</h3>
+                ${flights.map(flight => `
+                    <div class="flight-result-card">
+                        <div class="flight-header">
+                            <div class="flight-info">
+                                <h3>${flight.flightNumber}</h3>
+                                <p>${flight.airline}</p>
+                            </div>
+                            <div class="flight-status" style="color: ${flight.statusColor}">
+                                ${flight.status}
+                            </div>
+                        </div>
+                        
+                        <div class="flight-route">
+                            <div class="departure">
+                                <div class="time">${flight.departure.time}</div>
+                                <div class="airport">${flight.departure.airport}</div>
+                                <div class="terminal">Terminal ${flight.departure.terminal}</div>
+                            </div>
+                            
+                            <div class="flight-path">
+                                <div class="duration">${flight.duration}</div>
+                                <div class="path-line">
+                                    <span class="material-symbols-outlined">flight_takeoff</span>
+                                    <div class="line"></div>
+                                    <span class="material-symbols-outlined">flight_land</span>
+                                </div>
+                            </div>
+                            
+                            <div class="arrival">
+                                <div class="time">${flight.arrival.time}</div>
+                                <div class="airport">${flight.arrival.airport}</div>
+                                <div class="terminal">Terminal ${flight.arrival.terminal}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flight-details">
+                            <div class="detail-item">
+                                <span class="material-symbols-outlined">gate</span>
+                                <span>Gate ${flight.gate}</span>
+                            </div>
+                            <div class="detail-item price">
+                                <span class="material-symbols-outlined">attach_money</span>
+                                <span>${flight.price}</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    function saveRecentSearch(type, query) {
+        const recentSearches = JSON.parse(localStorage.getItem('recentFlightSearches') || '[]');
+        const newSearch = { type, query, timestamp: Date.now() };
+        
+        // Remove duplicate if exists
+        const filtered = recentSearches.filter(search => search.query !== query);
+        filtered.unshift(newSearch);
+        
+        // Keep only last 5 searches
+        const limited = filtered.slice(0, 5);
+        localStorage.setItem('recentFlightSearches', JSON.stringify(limited));
+        
+        loadRecentFlightSearches();
+    }
+
+    function loadRecentFlightSearches() {
+        const recentDiv = document.getElementById('recent-flight-searches');
+        if (!recentDiv) return;
+        
+        const recentSearches = JSON.parse(localStorage.getItem('recentFlightSearches') || '[]');
+        
+        if (recentSearches.length === 0) {
+            recentDiv.innerHTML = '<p class="no-recent">No recent searches</p>';
+            return;
+        }
+        
+        recentDiv.innerHTML = recentSearches.map(search => `
+            <div class="recent-item" onclick="repeatSearch('${search.type}', '${search.query}')">
+                <span class="material-symbols-outlined">${search.type === 'flight' ? 'flight' : 'route'}</span>
+                <span>${search.query}</span>
+                <span class="time">${new Date(search.timestamp).toLocaleDateString()}</span>
+            </div>
+        `).join('');
+    }
+
+    function repeatSearch(type, query) {
+        if (type === 'flight') {
+            document.getElementById('flight-number-search').value = query;
+            searchFlightByNumber(query);
+        } else if (type === 'route') {
+            const [departure, arrival] = query.split(' → ');
+            document.getElementById('departure-airport').value = departure;
+            document.getElementById('arrival-airport').value = arrival;
+            searchFlightByRoute(departure, arrival);
+        }
     }
 
     // Initial load
