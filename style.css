@@ -806,31 +806,6 @@ header p {
 }
 
 /* Airport Map Styles */
-.map-filters {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-    overflow-x: auto;
-    padding-bottom: 10px;
-}
-
-.filter-btn {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 20px;
-    padding: 8px 15px;
-    cursor: pointer;
-    font-size: 0.9em;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-}
-
-.filter-btn.active, .filter-btn:hover {
-    background: var(--primary-color);
-    color: var(--light-text-color);
-    border-color: var(--primary-color);
-}
 
 .map-container {
     width: 100%;
@@ -1399,10 +1374,12 @@ header p {
     transition: transform 0.4s ease-in-out;
     z-index: 100;
     border-radius: 32px;
+    pointer-events: none;
 }
 
 .ai-chat-container.active {
     transform: translateY(0);
+    pointer-events: auto;
 }
 
 .ai-chat-header {
@@ -1831,9 +1808,15 @@ input:checked + label:before {
     background: #e68a00;
 }
 
-/* Settings Page Styles */
+/* Settings Page Styles - Clean & Simple */
 .settings-section {
-    padding: 20px 0;
+    padding: 0;
+}
+
+.settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
 .setting-item {
@@ -1841,11 +1824,16 @@ input:checked + label:before {
     align-items: center;
     justify-content: space-between;
     padding: 20px 0;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease;
 }
 
 .setting-item:last-child {
     border-bottom: none;
+}
+
+.setting-item:hover {
+    background-color: #f8f9fa;
 }
 
 .setting-info {
@@ -1856,30 +1844,113 @@ input:checked + label:before {
 }
 
 .setting-info .material-symbols-outlined {
-    font-size: 24px;
+    font-size: 22px;
     color: var(--primary-color);
+    width: 24px;
+    text-align: center;
 }
 
 .setting-details h3 {
-    margin: 0 0 5px 0;
-    font-size: 1.1em;
-    font-weight: 600;
+    margin: 0 0 4px 0;
+    font-size: 1em;
+    font-weight: 500;
     color: var(--text-color);
 }
 
 .setting-details p {
     margin: 0;
-    font-size: 0.9em;
+    font-size: 0.85em;
     color: #666;
+    line-height: 1.3;
 }
 
 .setting-value {
     font-weight: 500;
     color: var(--primary-color);
+    font-size: 0.9em;
+}
+
+.setting-action .btn {
+    padding: 8px 16px;
+    font-size: 0.85em;
+    border-radius: 6px;
+    min-width: 60px;
 }
 
 .language-selector {
     margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+}
+
+.language-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.language-option:hover {
+    border-color: var(--primary-color);
+    background: #f8f9fa;
+}
+
+.language-option.active {
+    border-color: var(--primary-color);
+    background: var(--primary-color);
+    color: #fff;
+}
+
+.language-option.active .flag {
+    filter: brightness(0) invert(1);
+}
+
+.flag {
+    font-size: 18px;
+}
+
+.lang-name {
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+/* Simple divider */
+.settings-divider {
+    height: 1px;
+    background: #e0e0e0;
+    margin: 20px 0;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .language-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .setting-item {
+        padding: 18px 0;
+    }
+    
+    .setting-info {
+        gap: 12px;
+    }
+    
+    .setting-info .material-symbols-outlined {
+        font-size: 20px;
+    }
 }
 
 .language-options {
@@ -2074,4 +2145,318 @@ input:checked + label:before {
 
 .btn-secondary .material-symbols-outlined {
     font-size: 18px;
+}
+
+/* Airport Map Styles */
+.airport-info {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.airport-info p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: var(--text-color);
+}
+
+.shop-locations {
+    margin-top: 25px;
+}
+
+.shop-locations h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.location-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.location-category {
+    background: var(--card-background);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+}
+
+.location-category h4 {
+    margin: 0 0 15px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.location-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px;
+}
+
+.location-item {
+    background: #f8f9fa;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 0.9em;
+    color: var(--text-color);
+    border-left: 3px solid var(--accent-color);
+    transition: all 0.3s ease;
+}
+
+.location-item:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.location-item strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Authentication Styles */
+.auth-methods {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.auth-method {
+    margin-bottom: 15px;
+}
+
+.auth-btn {
+    width: 100%;
+    padding: 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+}
+
+.auth-btn:hover {
+    border-color: var(--primary-color);
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(8, 131, 149, 0.15);
+}
+
+.auth-btn .material-symbols-outlined {
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+.auth-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.auth-info p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.registration-form, .login-form {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-actions .btn {
+    flex: 1;
+}
+
+/* Charging Station Styles */
+.charging-features {
+    margin-top: 20px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.feature-item {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    border-color: var(--primary-color);
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(8, 131, 149, 0.15);
+}
+
+.feature-item .material-symbols-outlined {
+    font-size: 32px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.feature-item h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.feature-item p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Vehicle Management Styles */
+.vehicle-list {
+    margin-bottom: 20px;
+}
+
+.vehicle-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #e0e0e0;
+}
+
+.vehicle-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.vehicle-info p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+/* Global Search Styles */
+.search-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-container input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.search-results {
+    margin-top: 20px;
+}
+
+.search-category {
+    margin-bottom: 20px;
+}
+
+.search-category h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.search-item {
+    padding: 10px 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 3px solid var(--accent-color);
+}
+
+.search-item:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+}
+
+/* Knowledge Exploration Styles */
+.knowledge-categories {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.knowledge-category {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.knowledge-category:hover {
+    border-color: var(--primary-color);
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(8, 131, 149, 0.15);
+}
+
+.knowledge-category .material-symbols-outlined {
+    font-size: 32px;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.knowledge-category h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.knowledge-category p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
 }

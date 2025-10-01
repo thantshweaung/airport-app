@@ -309,13 +309,10 @@ document.addEventListener('DOMContentLoaded', () => {
         `,
         map: `
             <div class="feature-card">
-                <h2><span class="material-symbols-outlined">map</span> Airport Map</h2>
-                <div class="map-filters">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="gates">Gates</button>
-                    <button class="filter-btn" data-filter="food">Food & Dining</button>
-                    <button class="filter-btn" data-filter="shops">Shops</button>
-                    <button class="filter-btn" data-filter="restrooms">Restrooms</button>
+                <h2><span class="material-symbols-outlined">map</span> Yangon Airport Map</h2>
+                <div class="airport-info">
+                    <p><strong>Position:</strong> 16°54´26"N, 096°08´12"E</p>
+                    <p><strong>IATA:</strong> RGN | <strong>ICAO:</strong> VYYY</p>
                 </div>
                 <div class="map-container">
                     <iframe
@@ -323,11 +320,141 @@ document.addEventListener('DOMContentLoaded', () => {
                         height="400"
                         frameborder="0"
                         style="border:0; border-radius: var(--border-radius);"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2000000000005!2d-73.98765432345678!3d40.75800000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes%20Square!5e0!3m2!1sen!2sus!4v1678888888888!5m2!1sen!2sus"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3819.1234567890123!2d96.13700000000001!3d16.90722222222222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30c1949e6e7b8b8b%3A0x1234567890abcdef!2sYangon%20International%20Airport!5e0!3m2!1sen!2sus!4v1678888888888!5m2!1sen!2sus"
                         allowfullscreen
                         loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
+                </div>
+                <div class="shop-locations">
+                    <h3>Shop Locations</h3>
+                    <div class="location-categories">
+                        <div class="location-category">
+                            <h4><span class="material-symbols-outlined">storefront</span> Terminal 1 - Departure Hall</h4>
+                            <div class="location-items">
+                                <div class="location-item">
+                                    <strong>Coach</strong> - Gate A1-A5 area
+                                </div>
+                                <div class="location-item">
+                                    <strong>Fossil</strong> - Near Gate A6-A10
+                                </div>
+                                <div class="location-item">
+                                    <strong>Furla</strong> - Gate A11-A15 area
+                                </div>
+                                <div class="location-item">
+                                    <strong>Galleria</strong> - Central departure hall
+                                </div>
+                                <div class="location-item">
+                                    <strong>Kipling</strong> - Gate A16-A20 area
+                                </div>
+                                <div class="location-item">
+                                    <strong>Longines</strong> - Near Gate A21-A25
+                                </div>
+                                <div class="location-item">
+                                    <strong>Mandarinaa</strong> - Gate A26-A30 area
+                                </div>
+                                <div class="location-item">
+                                    <strong>Samsonite</strong> - Central departure hall
+                                </div>
+                                <div class="location-item">
+                                    <strong>Tumi</strong> - Gate A31-A35 area
+                                </div>
+                                <div class="location-item">
+                                    <strong>Versace</strong> - Near Gate A36-A40
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="location-category">
+                            <h4><span class="material-symbols-outlined">restaurant</span> Terminal 1 - Food Court</h4>
+                            <div class="location-items">
+                                <div class="location-item">
+                                    <strong>Cafe Corner</strong> - Food court center
+                                </div>
+                                <div class="location-item">
+                                    <strong>Coffee Bean</strong> - Near Gate B1-B5
+                                </div>
+                                <div class="location-item">
+                                    <strong>KFC</strong> - Food court area
+                                </div>
+                                <div class="location-item">
+                                    <strong>McDonald's</strong> - Near Gate B6-B10
+                                </div>
+                                <div class="location-item">
+                                    <strong>Parison</strong> - Food court center
+                                </div>
+                                <div class="location-item">
+                                    <strong>Yakun</strong> - Near Gate B11-B15
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="location-category">
+                            <h4><span class="material-symbols-outlined">storefront</span> Terminal 2 - Arrival Hall</h4>
+                            <div class="location-items">
+                                <div class="location-item">
+                                    <strong>Cavalli Class</strong> - Arrival hall center
+                                </div>
+                                <div class="location-item">
+                                    <strong>Dun 18</strong> - Near baggage claim 1-3
+                                </div>
+                                <div class="location-item">
+                                    <strong>Ermen</strong> - Near baggage claim 4-6
+                                </div>
+                                <div class="location-item">
+                                    <strong>Kate</strong> - Arrival hall center
+                                </div>
+                                <div class="location-item">
+                                    <strong>Mont</strong> - Near baggage claim 7-9
+                                </div>
+                                <div class="location-item">
+                                    <strong>Phwar</strong> - Near baggage claim 10-12
+                                </div>
+                                <div class="location-item">
+                                    <strong>Shanghai</strong> - Arrival hall center
+                                </div>
+                                <div class="location-item">
+                                    <strong>Swar</strong> - Near baggage claim 13-15
+                                </div>
+                                <div class="location-item">
+                                    <strong>Ladychin</strong> - Arrival hall center
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="location-category">
+                            <h4><span class="material-symbols-outlined">restaurant</span> Terminal 2 - Dining Area</h4>
+                            <div class="location-items">
+                                <div class="location-item">
+                                    <strong>Bon</strong> - Dining area center
+                                </div>
+                                <div class="location-item">
+                                    <strong>Cafe</strong> - Near Gate C1-C5
+                                </div>
+                                <div class="location-item">
+                                    <strong>Espace</strong> - Dining area center
+                                </div>
+                                <div class="location-item">
+                                    <strong>Jdonuts</strong> - Near Gate C6-C10
+                                </div>
+                                <div class="location-item">
+                                    <strong>JJ</strong> - Dining area center
+                                </div>
+                                <div class="location-item">
+                                    <strong>Krispy</strong> - Near Gate C11-C15
+                                </div>
+                                <div class="location-item">
+                                    <strong>Lotteria</strong> - Dining area center
+                                </div>
+                                <div class="location-item">
+                                    <strong>Myanmar Life</strong> - Near Gate C16-C20
+                                </div>
+                                <div class="location-item">
+                                    <strong>Yangoon</strong> - Dining area center
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         `,
@@ -639,47 +766,410 @@ document.addEventListener('DOMContentLoaded', () => {
         settings: `
             <div class="feature-card">
                 <h2><span class="material-symbols-outlined">settings</span> Settings</h2>
+                
                 <div class="settings-section">
-                    <div class="setting-item">
-                        <div class="setting-info">
-                            <span class="material-symbols-outlined">language</span>
-                            <div class="setting-details">
-                                <h3 data-translate="language">Language</h3>
-                                <p data-translate="selectLanguage">Select your preferred language</p>
+                    <div class="settings-list">
+                        <!-- Language Setting -->
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="material-symbols-outlined">language</span>
+                                <div class="setting-details">
+                                    <h3 data-translate="language">Language</h3>
+                                    <p data-translate="selectLanguage">Select your preferred language</p>
+                                </div>
+                            </div>
+                            <div class="setting-value">
+                                <span id="current-language">English</span>
                             </div>
                         </div>
-                        <div class="setting-value">
-                            <span id="current-language">English</span>
+                        
+                        <div class="language-selector">
+                            <div class="language-options">
+                                <button class="language-option" data-lang="en">
+                                    <span class="flag">🇺🇸</span>
+                                    <span class="lang-name">English</span>
+                                </button>
+                                <button class="language-option" data-lang="zh">
+                                    <span class="flag">🇨🇳</span>
+                                    <span class="lang-name">中文</span>
+                                </button>
+                                <button class="language-option" data-lang="ja">
+                                    <span class="flag">🇯🇵</span>
+                                    <span class="lang-name">日本語</span>
+                                </button>
+                                <button class="language-option" data-lang="ko">
+                                    <span class="flag">🇰🇷</span>
+                                    <span class="lang-name">한국어</span>
+                                </button>
+                                <button class="language-option" data-lang="th">
+                                    <span class="flag">🇹🇭</span>
+                                    <span class="lang-name">ไทย</span>
+                                </button>
+                                <button class="language-option" data-lang="my">
+                                    <span class="flag">🇲🇲</span>
+                                    <span class="lang-name">မြန်မာ</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-divider"></div>
+                        
+                        <!-- Privacy Policy -->
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="material-symbols-outlined">privacy_tip</span>
+                                <div class="setting-details">
+                                    <h3>Privacy Policy</h3>
+                                    <p>View our privacy policy</p>
+                                </div>
+                            </div>
+                            <div class="setting-action">
+                                <button class="btn btn-secondary" onclick="showAlert('Privacy Policy content will be displayed here.', 'Privacy Policy', 'info')">View</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Help Center -->
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="material-symbols-outlined">help</span>
+                                <div class="setting-details">
+                                    <h3>Help Center</h3>
+                                    <p>Get help and support</p>
+                                </div>
+                            </div>
+                            <div class="setting-action">
+                                <button class="btn btn-secondary" onclick="showAlert('Help Center - Common system help and online questions', 'Help Center', 'info')">Help</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Contact Us -->
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="material-symbols-outlined">contact_support</span>
+                                <div class="setting-details">
+                                    <h3>Contact Us</h3>
+                                    <p>Phone: +95-1-234-5678</p>
+                                </div>
+                            </div>
+                            <div class="setting-action">
+                                <button class="btn btn-secondary" onclick="showAlert('Contact Information:\\n\\nPhone: +95-1-234-5678\\nEmail: support@yangonairport.com\\nAddress: Yangon International Airport', 'Contact Us', 'info')">Contact</button>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-divider"></div>
+                        
+                        <!-- Version Update -->
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="material-symbols-outlined">update</span>
+                                <div class="setting-details">
+                                    <h3>Version Update</h3>
+                                    <p>Current version: 1.0.0</p>
+                                </div>
+                            </div>
+                            <div class="setting-action">
+                                <button class="btn btn-secondary" onclick="showAlert('Version 1.0.0\\n\\nLatest features:\\n- Multi-language support\\n- Airport map with shop locations\\n- Digital arrival card\\n- Charging services\\n- Member management', 'Version Update', 'info')">Check</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Terms of Service -->
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <span class="material-symbols-outlined">description</span>
+                                <div class="setting-details">
+                                    <h3>Terms of Service</h3>
+                                    <p>Read our terms and conditions</p>
+                                </div>
+                            </div>
+                            <div class="setting-action">
+                                <button class="btn btn-secondary" onclick="showAlert('Terms of Service content will be displayed here.', 'Terms of Service', 'info')">View</button>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        `,
+        
+        member_registration: `
+            <div class="feature-card">
+                <h2><span class="material-symbols-outlined">person_add</span> Member Registration</h2>
+                <div class="auth-methods">
+                    <div class="auth-method">
+                        <button class="auth-btn phone-auth" onclick="showPhoneRegistration()">
+                            <span class="material-symbols-outlined">phone</span>
+                            <div class="auth-info">
+                                <h3>Phone Number</h3>
+                                <p>Myanmar local number + OTP</p>
+                            </div>
+                        </button>
+                    </div>
                     
-                    <div class="language-selector">
-                        <div class="language-options">
-                            <button class="language-option" data-lang="en">
-                                <span class="flag">🇺🇸</span>
-                                <span class="lang-name">English</span>
-                            </button>
-                            <button class="language-option" data-lang="zh">
-                                <span class="flag">🇨🇳</span>
-                                <span class="lang-name">中文 (Chinese)</span>
-                            </button>
-                            <button class="language-option" data-lang="ja">
-                                <span class="flag">🇯🇵</span>
-                                <span class="lang-name">日本語 (Japanese)</span>
-                            </button>
-                            <button class="language-option" data-lang="ko">
-                                <span class="flag">🇰🇷</span>
-                                <span class="lang-name">한국어 (Korean)</span>
-                            </button>
-                            <button class="language-option" data-lang="th">
-                                <span class="flag">🇹🇭</span>
-                                <span class="lang-name">ไทย (Thai)</span>
-                            </button>
-                            <button class="language-option" data-lang="my">
-                                <span class="flag">🇲🇲</span>
-                                <span class="lang-name">မြန်မာ (Myanmar)</span>
-                            </button>
+                    <div class="auth-method">
+                        <button class="auth-btn email-auth" onclick="showEmailRegistration()">
+                            <span class="material-symbols-outlined">email</span>
+                            <div class="auth-info">
+                                <h3>Email</h3>
+                                <p>Email address + OTP</p>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <div class="auth-method">
+                        <button class="auth-btn apple-auth" onclick="showAlert('Apple ID registration will be implemented here.', 'Apple ID Registration', 'info')">
+                            <span class="material-symbols-outlined">apple</span>
+                            <div class="auth-info">
+                                <h3>Apple ID</h3>
+                                <p>Sign in with Apple</p>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <div class="auth-method">
+                        <button class="auth-btn google-auth" onclick="showAlert('Google Account registration will be implemented here.', 'Google Registration', 'info')">
+                            <span class="material-symbols-outlined">google</span>
+                            <div class="auth-info">
+                                <h3>Google Account</h3>
+                                <p>Sign in with Google</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="phone-registration-form" style="display: none;">
+                    <form class="registration-form">
+                        <div class="form-group">
+                            <label for="phone-number">Phone Number</label>
+                            <input type="tel" id="phone-number" placeholder="+95 9XXXXXXXX" required>
                         </div>
+                        <div class="form-group">
+                            <label for="otp-code">OTP Code</label>
+                            <input type="text" id="otp-code" placeholder="Enter 6-digit OTP" required>
+                            <button type="button" class="btn btn-secondary" onclick="sendOTP()">Send OTP</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Create password" required>
+                        </div>
+                        <button type="submit" class="btn">Register</button>
+                    </form>
+                </div>
+                
+                <div id="email-registration-form" style="display: none;">
+                    <form class="registration-form">
+                        <div class="form-group">
+                            <label for="email-address">Email Address</label>
+                            <input type="email" id="email-address" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email-otp">OTP Code</label>
+                            <input type="text" id="email-otp" placeholder="Enter 6-digit OTP" required>
+                            <button type="button" class="btn btn-secondary" onclick="sendEmailOTP()">Send OTP</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="email-password">Password</label>
+                            <input type="password" id="email-password" placeholder="Create password" required>
+                        </div>
+                        <button type="submit" class="btn">Register</button>
+                    </form>
+                </div>
+            </div>
+        `,
+        
+        member_login: `
+            <div class="feature-card">
+                <h2><span class="material-symbols-outlined">login</span> Member Login</h2>
+                <div class="auth-methods">
+                    <div class="auth-method">
+                        <button class="auth-btn phone-auth" onclick="showPhoneLogin()">
+                            <span class="material-symbols-outlined">phone</span>
+                            <div class="auth-info">
+                                <h3>Phone Number</h3>
+                                <p>Myanmar local number + Password</p>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <div class="auth-method">
+                        <button class="auth-btn email-auth" onclick="showEmailLogin()">
+                            <span class="material-symbols-outlined">email</span>
+                            <div class="auth-info">
+                                <h3>Email</h3>
+                                <p>Email address + Password</p>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <div class="auth-method">
+                        <button class="auth-btn apple-auth" onclick="showAlert('Apple ID login will be implemented here.', 'Apple ID Login', 'info')">
+                            <span class="material-symbols-outlined">apple</span>
+                            <div class="auth-info">
+                                <h3>Apple ID</h3>
+                                <p>Sign in with Apple</p>
+                            </div>
+                        </button>
+                    </div>
+                    
+                    <div class="auth-method">
+                        <button class="auth-btn google-auth" onclick="showAlert('Google Account login will be implemented here.', 'Google Login', 'info')">
+                            <span class="material-symbols-outlined">google</span>
+                            <div class="auth-info">
+                                <h3>Google Account</h3>
+                                <p>Sign in with Google</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="phone-login-form" style="display: none;">
+                    <form class="login-form">
+                        <div class="form-group">
+                            <label for="login-phone">Phone Number</label>
+                            <input type="tel" id="login-phone" placeholder="+95 9XXXXXXXX" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" placeholder="Enter password" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Login</button>
+                            <button type="button" class="btn btn-secondary" onclick="showForgotPassword()">Forgot Password?</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div id="email-login-form" style="display: none;">
+                    <form class="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email Address</label>
+                            <input type="email" id="login-email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-email-password">Password</label>
+                            <input type="password" id="login-email-password" placeholder="Enter password" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn">Login</button>
+                            <button type="button" class="btn btn-secondary" onclick="showForgotPassword()">Forgot Password?</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        `,
+        
+        charging_stations: `
+            <div class="feature-card">
+                <h2><span class="material-symbols-outlined">ev_charging</span> Charging Stations</h2>
+                <div class="charging-features">
+                    <div class="feature-grid">
+                        <div class="feature-item" onclick="showChargingStationSearch()">
+                            <span class="material-symbols-outlined">search</span>
+                            <h3>Station Search</h3>
+                            <p>Find nearby charging stations</p>
+                        </div>
+                        <div class="feature-item" onclick="showChargingStationDetails()">
+                            <span class="material-symbols-outlined">info</span>
+                            <h3>Station Details</h3>
+                            <p>View station information</p>
+                        </div>
+                        <div class="feature-item" onclick="showUserPositioning()">
+                            <span class="material-symbols-outlined">my_location</span>
+                            <h3>User Positioning</h3>
+                            <p>Get your current location</p>
+                        </div>
+                        <div class="feature-item" onclick="showNavigation()">
+                            <span class="material-symbols-outlined">navigation</span>
+                            <h3>Navigation</h3>
+                            <p>Navigate to charging station</p>
+                        </div>
+                        <div class="feature-item" onclick="showStationReservation()">
+                            <span class="material-symbols-outlined">event_available</span>
+                            <h3>Reservation</h3>
+                            <p>Reserve charging station</p>
+                        </div>
+                        <div class="feature-item" onclick="showScanCode()">
+                            <span class="material-symbols-outlined">qr_code_scanner</span>
+                            <h3>Scan Code</h3>
+                            <p>Scan QR code to charge</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `,
+        
+        vehicle_management: `
+            <div class="feature-card">
+                <h2><span class="material-symbols-outlined">directions_car</span> Vehicle Management</h2>
+                <div class="vehicle-list">
+                    <div class="vehicle-item">
+                        <div class="vehicle-info">
+                            <h3>Tesla Model 3</h3>
+                            <p>License: ABC-1234</p>
+                            <p>MAC: 12:34:56:78:90:AB</p>
+                        </div>
+                        <button class="btn btn-secondary">Edit</button>
+                    </div>
+                    <div class="vehicle-item">
+                        <div class="vehicle-info">
+                            <h3>BMW i3</h3>
+                            <p>License: XYZ-5678</p>
+                            <p>MAC: CD:EF:12:34:56:78</p>
+                        </div>
+                        <button class="btn btn-secondary">Edit</button>
+                    </div>
+                </div>
+                <button class="btn" onclick="showAddVehicle()">Add Vehicle</button>
+            </div>
+        `,
+        
+        global_search: `
+            <div class="feature-card">
+                <h2><span class="material-symbols-outlined">search</span> Global Search</h2>
+                <div class="search-container">
+                    <input type="text" id="global-search" placeholder="Search app functions, shops, services...">
+                    <button class="search-btn">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
+                </div>
+                <div class="search-results">
+                    <div class="search-category">
+                        <h3>Quick Actions</h3>
+                        <div class="search-item" onclick="loadFeature('arrival_customs')">Digital Arrival Card</div>
+                        <div class="search-item" onclick="loadFeature('charging_stations')">Charging Stations</div>
+                        <div class="search-item" onclick="loadFeature('shops')">Airport Shops</div>
+                    </div>
+                    <div class="search-category">
+                        <h3>Services</h3>
+                        <div class="search-item" onclick="loadFeature('lounge')">Lounge Booking</div>
+                        <div class="search-item" onclick="loadFeature('parking')">Parking</div>
+                        <div class="search-item" onclick="loadFeature('map')">Airport Map</div>
+                    </div>
+                </div>
+            </div>
+        `,
+        
+        knowledge_exploration: `
+            <div class="feature-card">
+                <h2><span class="material-symbols-outlined">school</span> Knowledge Exploration</h2>
+                <div class="knowledge-categories">
+                    <div class="knowledge-category" onclick="showKnowledge('entry-registration')">
+                        <span class="material-symbols-outlined">assignment</span>
+                        <h3>Entry Registration</h3>
+                        <p>How to fill out entry registration forms</p>
+                    </div>
+                    <div class="knowledge-category" onclick="showKnowledge('charging-services')">
+                        <span class="material-symbols-outlined">ev_charging</span>
+                        <h3>Charging Services</h3>
+                        <p>How to use charging services</p>
+                    </div>
+                    <div class="knowledge-category" onclick="showKnowledge('airport-navigation')">
+                        <span class="material-symbols-outlined">map</span>
+                        <h3>Airport Navigation</h3>
+                        <p>How to navigate the airport</p>
+                    </div>
+                    <div class="knowledge-category" onclick="showKnowledge('member-benefits')">
+                        <span class="material-symbols-outlined">star</span>
+                        <h3>Member Benefits</h3>
+                        <p>Understanding membership benefits</p>
                     </div>
                 </div>
             </div>
@@ -1477,39 +1967,44 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentProfileKey = profileKeys[currentProfileIndex];
         const profileData = arrivalCardProfiles[currentProfileKey];
         
-        // Get all form elements
-        const formElements = form.querySelectorAll('input, select, textarea');
-        let filledCount = 0;
+        // Direct field mapping to ensure all fields are filled
+        const fieldMappings = {
+            'applicant-type': profileData.applicantType,
+            'family-name': profileData.familyName,
+            'first-name': profileData.firstName,
+            'middle-name': profileData.middleName,
+            'dob': profileData.dob,
+            'sex': profileData.sex,
+            'nationality': profileData.nationality,
+            'occupation': profileData.occupation,
+            'passport': profileData.passport,
+            'passport-issue-place': profileData.passportIssuePlace,
+            'passport-issue-date': profileData.passportIssueDate,
+            'expiry-date': profileData.expiryDate,
+            'visa-number': profileData.visaNumber,
+            'visa-issue-place': profileData.visaIssuePlace,
+            'visa-issue-date': profileData.visaIssueDate,
+            'from-origin': profileData.fromOrigin,
+            'flight-number': profileData.flightNumber,
+            'first-trip': profileData.firstTrip,
+            'group-tour': profileData.groupTour,
+            'length-of-stay': profileData.lengthOfStay,
+            'visit-purpose': profileData.visitPurpose,
+            'country-residence': profileData.countryResidence,
+            'address': profileData.address,
+            'id-card-number': profileData.idCardNumber,
+            'father-name': profileData.fatherName,
+            'prohibited-goods': profileData.prohibitedGoods,
+            'currency-declaration': profileData.currencyDeclaration,
+            'goods-value': profileData.goodsValue,
+            'signature-name': profileData.signatureName
+        };
         
-        // Fill all form fields with current profile data
-        formElements.forEach(element => {
-            const elementId = element.id;
-            
-            // Skip submit button
-            if (element.type === 'submit') return;
-            
-            // Fill with profile data if available
-            if (profileData[elementId] !== undefined) {
-                element.value = profileData[elementId];
-                filledCount++;
-            }
-            // For elements not in profile data, fill with sensible defaults
-            else if (element.type === 'text' || element.type === 'number') {
-                if (elementId === 'middle-name') {
-                    element.value = ''; // Leave middle name empty if not provided
-                } else if (elementId === 'visa-number') {
-                    element.value = ''; // Leave visa number empty if not provided
-                } else if (elementId === 'visa-issue-place') {
-                    element.value = ''; // Leave visa issue place empty if not provided
-                } else if (elementId === 'visa-issue-date') {
-                    element.value = ''; // Leave visa issue date empty if not provided
-                } else if (elementId === 'id-card-number') {
-                    element.value = ''; // Leave ID card number empty if not provided
-                } else if (elementId === 'father-name') {
-                    element.value = ''; // Leave father's name empty if not provided
-                } else if (elementId === 'goods-value') {
-                    element.value = ''; // Leave goods value empty if not provided
-                }
+        // Fill all fields using direct mapping
+        Object.keys(fieldMappings).forEach(fieldId => {
+            const element = document.getElementById(fieldId);
+            if (element && fieldMappings[fieldId] !== undefined) {
+                element.value = fieldMappings[fieldId];
             }
         });
 
@@ -1522,10 +2017,59 @@ document.addEventListener('DOMContentLoaded', () => {
         const profileType = profileData.applicantType === 'me' ? 'Self' : 'Other Person';
         
         showAlert(
-            `Form filled with ${profileType} profile: ${profileName} (${profileNationality})\n\nAll required fields have been completed.`, 
+            `Form filled with ${profileType} profile: ${profileName} (${profileNationality})\n\nClick OK to navigate to Customs Declaration section.`, 
             'Autofill Complete', 
             'success'
-        );
+        ).then(() => {
+            // Ensure AI chat container is not interfering
+            const aiChatContainer = document.getElementById('ai-chat-container');
+            if (aiChatContainer && aiChatContainer.classList.contains('active')) {
+                aiChatContainer.classList.remove('active');
+            }
+            
+            // Navigate to Customs Declaration section after user clicks OK
+            setTimeout(() => {
+                const customsSection = document.querySelector('h3');
+                if (customsSection && customsSection.textContent.includes('Customs Declaration')) {
+                    // Scroll the main content container instead of the whole page
+                    const mainContent = document.getElementById('main-content');
+                    if (mainContent) {
+                        const customsRect = customsSection.getBoundingClientRect();
+                        const mainRect = mainContent.getBoundingClientRect();
+                        const scrollTop = customsRect.top - mainRect.top + mainContent.scrollTop - 20;
+                        
+                        mainContent.scrollTo({
+                            top: scrollTop,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        // Fallback to regular scrollIntoView
+                        customsSection.scrollIntoView({ 
+                            behavior: 'smooth', 
+                            block: 'start',
+                            inline: 'nearest'
+                        });
+                    }
+                    
+                    // Add a subtle highlight effect
+                    customsSection.style.backgroundColor = '#e3f2fd';
+                    customsSection.style.padding = '10px';
+                    customsSection.style.borderRadius = '8px';
+                    customsSection.style.transition = 'all 0.3s ease';
+                    customsSection.style.position = 'relative';
+                    customsSection.style.zIndex = '10';
+                    
+                    // Remove highlight after 3 seconds
+                    setTimeout(() => {
+                        customsSection.style.backgroundColor = '';
+                        customsSection.style.padding = '';
+                        customsSection.style.borderRadius = '';
+                        customsSection.style.position = '';
+                        customsSection.style.zIndex = '';
+                    }, 3000);
+                }
+            }, 100);
+        });
     }
 
     // Clear form function
@@ -1612,6 +2156,81 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             };
         });
+    }
+
+    // Authentication Functions
+    function showPhoneRegistration() {
+        document.getElementById('phone-registration-form').style.display = 'block';
+        document.getElementById('email-registration-form').style.display = 'none';
+    }
+
+    function showEmailRegistration() {
+        document.getElementById('email-registration-form').style.display = 'block';
+        document.getElementById('phone-registration-form').style.display = 'none';
+    }
+
+    function showPhoneLogin() {
+        document.getElementById('phone-login-form').style.display = 'block';
+        document.getElementById('email-login-form').style.display = 'none';
+    }
+
+    function showEmailLogin() {
+        document.getElementById('email-login-form').style.display = 'block';
+        document.getElementById('phone-login-form').style.display = 'none';
+    }
+
+    function sendOTP() {
+        showAlert('OTP sent to your phone number!', 'OTP Sent', 'success');
+    }
+
+    function sendEmailOTP() {
+        showAlert('OTP sent to your email address!', 'OTP Sent', 'success');
+    }
+
+    function showForgotPassword() {
+        showAlert('Password reset instructions will be sent to your registered email/phone.', 'Forgot Password', 'info');
+    }
+
+    // Charging Station Functions
+    function showChargingStationSearch() {
+        showAlert('Charging station search functionality will be implemented here.', 'Station Search', 'info');
+    }
+
+    function showChargingStationDetails() {
+        showAlert('Charging station details will be displayed here.', 'Station Details', 'info');
+    }
+
+    function showUserPositioning() {
+        showAlert('Getting your current location...', 'User Positioning', 'info');
+    }
+
+    function showNavigation() {
+        showAlert('Navigation to charging station will be implemented here.', 'Navigation', 'info');
+    }
+
+    function showStationReservation() {
+        showAlert('Charging station reservation functionality will be implemented here.', 'Station Reservation', 'info');
+    }
+
+    function showScanCode() {
+        showAlert('QR code scanning for charging will be implemented here.', 'Scan Code', 'info');
+    }
+
+    // Vehicle Management Functions
+    function showAddVehicle() {
+        showAlert('Add vehicle form will be implemented here.', 'Add Vehicle', 'info');
+    }
+
+    // Knowledge Functions
+    function showKnowledge(topic) {
+        const knowledgeContent = {
+            'entry-registration': 'Entry Registration Guide:\\n\\n1. Fill out personal information\\n2. Complete passport details\\n3. Add visa information\\n4. Submit customs declaration\\n5. Review and confirm',
+            'charging-services': 'Charging Services Guide:\\n\\n1. Find nearby charging stations\\n2. Reserve a charging slot\\n3. Navigate to the station\\n4. Scan QR code to start\\n5. Monitor charging progress',
+            'airport-navigation': 'Airport Navigation Guide:\\n\\n1. Use the interactive map\\n2. Find shops and services\\n3. Locate gates and terminals\\n4. Check flight information\\n5. Access amenities',
+            'member-benefits': 'Member Benefits:\\n\\n1. Priority charging access\\n2. Exclusive discounts\\n3. Points and rewards\\n4. Premium support\\n5. Special offers'
+        };
+        
+        showAlert(knowledgeContent[topic] || 'Knowledge content not available.', 'Knowledge Base', 'info');
     }
 
     // Initial load
