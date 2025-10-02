@@ -1,16 +1,18 @@
 {
-  "name": "airport_app",
+  "name": "airport-app",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^4.19.2",
+    "bcrypt": "^5.1.1",
+    "express-session": "^1.18.0"
   }
 }

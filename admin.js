@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <table>
                     <thead><tr><th>Title</th><th>Message</th><th>Actions</th></tr></thead>
                     <tbody>
-                        <tr><td>Terminal 1 Renovation</td><td>Terminal 1 will be closed for renovation from...</td><td><div class="action-buttons"><button class="edit-announcement-btn"><span class="material-symbols-outlined">edit</span></button><button class="delete-btn"><span class="material-symbols-outlined">delete</span></button></div></td></tr>
+                        <tr><td>Terminal 2</td><td>Terminal 2 will be closed for renovation from...</td><td><div class="action-buttons"><button class="edit-announcement-btn"><span class="material-symbols-outlined">edit</span></button><button class="delete-btn"><span class="material-symbols-outlined">delete</span></button></div></td></tr>
                     </tbody>
                 </table>
             </div>

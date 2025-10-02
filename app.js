@@ -1,7 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Check auth status
+    fetch('/api/auth/status')
+        .then(res => res.json())
+        .then(data => {
+            const loginBtn = document.getElementById('login-btn');
+            const registerBtn = document.getElementById('register-btn');
+            const logoutBtn = document.getElementById('logout-btn');
+
+            if (data.loggedIn) {
+                if (loginBtn) loginBtn.style.display = 'none';
+                if (registerBtn) registerBtn.style.display = 'none';
+                if (logoutBtn) logoutBtn.style.display = 'block';
+            } else {
+                if (loginBtn) loginBtn.style.display = 'block';
+                if (registerBtn) registerBtn.style.display = 'block';
+                if (logoutBtn) logoutBtn.style.display = 'none';
+            }
+        });
+
+    const logoutBtn = document.getElementById('logout-btn');
+    if(logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            fetch('/logout').then(() => window.location.href = '/login.html');
+        });
+    }
+
     // Load saved language first
     loadLanguage();
     
+    // Load arrival_customs feature by default for guests
     const mainContent = document.getElementById('main-content');
     const navItems = document.querySelectorAll('.nav-item');
     const backBtn = document.getElementById('back-btn');
@@ -13,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendChatBtn = document.getElementById('send-chat-btn');
     const chatBox = document.getElementById('ai-chat-box');
 
+    // Define features object before using it
     const features = {
         home: `
             <div class="home-dashboard">
@@ -369,7 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h3>Shop Locations</h3>
                     <div class="location-categories">
                         <div class="location-category">
-                            <h4><span class="material-symbols-outlined">storefront</span> Terminal 1 - Departure Hall</h4>
+                            <h4><span class="material-symbols-outlined">storefront</span> Terminal 2 - Departure Hall</h4>
                             <div class="location-items">
                                 <div class="location-item">
                                     <strong>Coach</strong> - Gate A1-A5 area
@@ -405,7 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         
                         <div class="location-category">
-                            <h4><span class="material-symbols-outlined">restaurant</span> Terminal 1 - Food Court</h4>
+                            <h4><span class="material-symbols-outlined">restaurant</span> Terminal 2 - Food Court</h4>
                             <div class="location-items">
                                 <div class="location-item">
                                     <strong>Cafe Corner</strong> - Food court center
@@ -502,7 +530,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="feature-card">
                 <h2><span class="material-symbols-outlined">directions_car</span> Car Park Availability</h2>
                 <p>Real-time parking status will be shown here.</p>
-                <p><strong>Terminal 1:</strong> 120/200 spots available</p>
+                <p><strong>Terminal 2:</strong> 120/200 spots available</p>
                 <p><strong>Terminal 2:</strong> 80/150 spots available</p>
             </div>
         `,
@@ -1215,6 +1243,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `
     };
 
+
     function loadFeature(featureName) {
         if (featureName === 'shops') {
             loadShops();
@@ -1231,6 +1260,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 300);
             }
             headerText.style.textAlign = 'center';
+            // Close AI chat container when returning to home
+            if (aiChatContainer && aiChatContainer.classList.contains('active')) {
+                aiChatContainer.classList.remove('active');
+            }
         } else {
             if (backBtn.style.display === 'none') {
                 backBtn.style.display = 'flex';
@@ -1240,6 +1273,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 400);
             }
             headerText.style.textAlign = 'left';
+            // Close AI chat container when navigating to other services
+            if (aiChatContainer && aiChatContainer.classList.contains('active')) {
+                aiChatContainer.classList.remove('active');
+            }
         }
 
         // Add event listeners
@@ -1369,9 +1406,11 @@ document.addEventListener('DOMContentLoaded', () => {
         loadRecentFlightSearches();
 
         const serviceItems = document.querySelectorAll('.service-item');
+        console.log('Setting up service item listeners for', serviceItems.length, 'items');
         serviceItems.forEach(item => {
             item.addEventListener('click', () => {
                 const feature = item.getAttribute('data-feature');
+                console.log('Service item clicked:', feature);
                 loadFeature(feature);
                 updateNav(feature);
             });
@@ -1531,8 +1570,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const announcementContainer = document.getElementById('announcement-container');
         // Dummy announcement
         const announcement = {
-            title: 'Terminal 1 Renovation',
-            message: 'Terminal 1 will be closed for renovation from 1st October to 31st December.'
+            title: 'Terminal 2',
+            message: 'Terminal 2 will be closed for renovation from 1st October to 31st December.'
         };
 
         if (announcement) {
@@ -2730,8 +2769,63 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initial load
-    loadFeature('home');
+    // Initial load - check authentication status from server
+    async function checkAuthAndLoad() {
+        console.log('Checking authentication status...');
+        try {
+            const response = await fetch('/api/auth/status');
+            console.log('Auth response status:', response.status);
+            const authData = await response.json();
+            console.log('Auth data received:', authData);
+            
+            if (authData.loggedIn) {
+                // For logged-in users, show home page with service grid
+                console.log('User is logged in:', authData.user.email);
+                loadFeature('home');
+                updateNav('home');
+            } else {
+                // For guests, show arrival customs form directly
+                console.log('User is a guest - showing arrival customs form');
+                loadFeature('arrival_customs');
+                updateNav('arrival_customs');
+                // Hide back button for guests since they're on the main form
+                const backBtn = document.getElementById('back-btn');
+                if (backBtn) {
+                    backBtn.style.display = 'none';
+                }
+                // Hide bottom navigation for guests
+                const bottomNav = document.querySelector('.bottom-nav');
+                if (bottomNav) {
+                    bottomNav.style.display = 'none';
+                }
+            }
+        } catch (error) {
+            console.log('Auth check failed, treating as guest:', error);
+            // If auth check fails, treat as guest
+            console.log('Treating as guest due to auth check failure');
+            loadFeature('arrival_customs');
+            updateNav('arrival_customs');
+            // Hide back button for guests since they're on the main form
+            const backBtn = document.getElementById('back-btn');
+            if (backBtn) {
+                backBtn.style.display = 'none';
+            }
+            // Hide bottom navigation for guests
+            const bottomNav = document.querySelector('.bottom-nav');
+            if (bottomNav) {
+                bottomNav.style.display = 'none';
+            }
+        }
+    }
+    
+    // Check auth status and load appropriate content
+    checkAuthAndLoad();
+    
+    // Ensure AI chat container starts in closed state
+    if (aiChatContainer && aiChatContainer.classList.contains('active')) {
+        aiChatContainer.classList.remove('active');
+    }
+    
     loadAnnouncements();
     updateUI(); // Update UI with current language
 
