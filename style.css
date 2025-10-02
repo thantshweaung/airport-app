@@ -2241,6 +2241,14 @@ input:checked + label:before {
     object-fit: contain;
     display: block;
     flex-shrink: 0;
+    filter: brightness(0) saturate(100%);
+}
+
+.apple-icon {
+    font-size: 20px;
+    margin-right: 0.5rem;
+    display: block;
+    flex-shrink: 0;
 }
 
 .phone-group {
