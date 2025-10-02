@@ -1939,24 +1939,93 @@ input:checked + label:before {
     grid-template-columns: repeat(2, 1fr);
 }
 
-/* Media query for phone devices */
+/* Media query for mobile devices only */
 @media (max-width: 768px) {
+    /* Make phone-frame full-screen on mobile instead of hiding it */
     .phone-frame {
-        display: none;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: #f8f9fa !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        z-index: 1000 !important;
     }
 
-    body, html {
-        background-color: var(--background-color);
-        overflow: auto;
+    /* Hide the phone frame notch on mobile */
+    .phone-frame::before {
+        display: none !important;
     }
 
     .phone-screen {
         width: 100%;
         height: 100%;
         border-radius: 0;
-        overflow: auto;
+        background-color: #f8f9fa;
+    }
+
+    .app-container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .auth-container-v2 {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        margin: 0;
+    }
+
+    .auth-page-v2 {
+        min-height: 100vh;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .auth-form-v2 {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    /* Hide status bar on mobile */
+    .status-bar {
+        display: none !important;
+    }
+
+    /* Hide home indicator on mobile */
+    .home-indicator {
+        display: none !important;
     }
 }
+
+/* Additional mobile styles for very small screens */
+@media (max-width: 480px) {
+    .auth-container-v2 {
+        padding: 15px !important;
+    }
+
+    .auth-form-v2 {
+        max-width: 100% !important;
+    }
+
+    .form-group-v2 input {
+        padding: 0.8rem 2rem !important;
+        font-size: 16px !important; /* Prevents zoom on iOS */
+    }
+
+    .btn-v2 {
+        padding: 0.8rem 1rem !important;
+        font-size: 16px !important;
+    }
+}
+
 
 /* Auth Page Styles */
 .auth-container {
@@ -2223,6 +2292,36 @@ input:checked + label:before {
 
 .social-btn-v2:hover {
     background-color: #f8f9fa;
+}
+
+.test-credentials {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #e9ecef;
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+}
+
+.credentials-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.credentials-info {
+    text-align: center;
+}
+
+.credentials-info p {
+    margin: 0.25rem 0;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.credentials-info strong {
+    color: #495057;
 }
 
 .social-btn-v2 img {
